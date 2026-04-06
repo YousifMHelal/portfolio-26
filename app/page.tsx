@@ -7,12 +7,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
 import DotNav from "@/components/layout/DotNav";
+import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/navbar";
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
 import { ProjectsSection } from "@/components/sections/projects";
 import { SkillsSection } from "@/components/sections/skills";
-import { Contact } from "@/components/sections/Contact";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { Contact } from "@/components/sections/contact";
 import { hero } from "@/data";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -285,7 +287,9 @@ export default function Home() {
       <AboutSection />
       <ProjectsSection />
       <SkillsSection />
+      <Testimonials />
       <Contact />
+      <Footer />
     </main>
   );
 }

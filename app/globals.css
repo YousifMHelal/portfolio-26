@@ -257,3 +257,43 @@
     display: none;
   }
 }
+
+@media (max-width: 1023px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+  }
+
+  .footer-left {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .testimonials-side {
+    flex-direction: row !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonials-side {
+    flex-direction: column !important;
+  }
+}

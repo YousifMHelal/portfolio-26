@@ -9,42 +9,45 @@ const sections = [
   { id: "about-section", label: "About" },
   { id: "projects-section", label: "Projects" },
   { id: "skills-section", label: "Skills" },
+  { id: "testimonials-section", label: "Testimonials" },
   { id: "contact-section", label: "Contact" },
+  { id: "footer-section", label: "Footer" },
 ] as const;
 
 export default function DotNav() {
   const [activeSection, setActiveSection] = useState("hero-section");
 
   useEffect(() => {
-    const observers = sections.map(({ id }) => {
-      const el = document.getElementById(id);
+    const handleScroll = () => {
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      let current = sections[0].id;
 
-      if (!el) {
-        return null;
-      }
+      sections.forEach(({ id }) => {
+        const el = document.getElementById(id);
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { threshold: 0.5 },
-      );
+        if (el && marker >= el.offsetTop) {
+          current = id;
+        }
+      });
 
-      observer.observe(el);
-      return observer;
-    });
+      setActiveSection((prev) => (prev === current ? prev : current));
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      observers.forEach((observer) => {
-        observer?.disconnect();
-      });
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setActiveSection(id);
+    document
+      .getElementById(id)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (

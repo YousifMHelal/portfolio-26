@@ -5,6 +5,7 @@ import type {
   PersonalInfo,
   Project,
   SkillItem,
+  Testimonial,
   TimelineItem,
 } from "@/types";
 
@@ -100,7 +101,7 @@ export const projects: Project[] = [
       "Tailwind CSS",
     ],
     githubUrl: "https://github.com/YousifMHelal/bookified",
-    liveUrl: "https://bookified.vercel.app",
+    liveUrl: "https://bookified-bay.vercel.app/",
     size: "large",
     image: "/assets/projects/bookified.png",
   },
@@ -251,6 +252,30 @@ export const skills: SkillItem[] = [
     id: "skill-1",
     name: "",
     category: "",
+  },
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "Ahmed Abdelwahab",
+    quote:
+      "Yousif is one of the most talented people I've worked with. He delivers work correctly and on time, and if there are any revisions he handles them without hesitation and at no extra cost - delivering exactly what was required.",
+    featured: true,
+  },
+  {
+    id: 2,
+    name: "Mohamed Ahmed",
+    quote:
+      "One of the best people I've worked with. He built several apps that fully digitized our paper-based workflow - and all of that during his military service, without internet access.",
+    featured: false,
+  },
+  {
+    id: 3,
+    name: "Mahmoud Mohamed",
+    quote:
+      "I highly recommend working with him. One of the most skilled people I've worked with, delivering exceptional results in record time.",
+    featured: false,
   },
 ];
 
