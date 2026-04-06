@@ -2,7 +2,7 @@ import type {
   AboutData,
   HeroContent,
   PersonalInfo,
-  ProjectItem,
+  Project,
   SkillItem,
   TimelineItem,
 } from "@/types";
@@ -82,14 +82,119 @@ export const personalInfo: PersonalInfo = {
   summary: "",
 };
 
-export const projects: ProjectItem[] = [
+export const projects: Project[] = [
   {
-    id: "project-1",
-    title: "",
-    description: "",
-    techStack: [],
-    githubUrl: "",
-    liveUrl: "",
+    id: 1,
+    title: "Bookified",
+    description:
+      "AI-powered voice companion platform that transforms PDFs into interactive conversational experiences with real-time voice AI.",
+    techStack: [
+      "Next.js 16",
+      "TypeScript",
+      "MongoDB",
+      "Vapi",
+      "ElevenLabs",
+      "Google Gemini",
+      "Clerk Auth",
+      "Tailwind CSS",
+    ],
+    githubUrl: "https://github.com/YousifMHelal/bookified",
+    liveUrl: "https://bookified.vercel.app",
+    size: "large",
+    image: "/assets/projects/bookified.png",
+  },
+  {
+    id: 2,
+    title: "Edu Nexus",
+    description:
+      "Comprehensive school management dashboard with role-based access for admins, teachers, students, and parents.",
+    techStack: [
+      "Next.js 14",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Clerk Auth",
+      "Shadcn UI",
+      "Tailwind CSS",
+    ],
+    githubUrl: "https://github.com/YousifMHelal/edu-nexus",
+    liveUrl: null,
+    size: "medium",
+    image: "/assets/projects/edu-nexus.png",
+  },
+  {
+    id: 3,
+    title: "Trendy",
+    description:
+      "Full-featured e-commerce platform with product management, Stripe payments, order processing, and email notifications.",
+    techStack: [
+      "Next.js 14",
+      "TypeScript",
+      "MongoDB",
+      "Stripe",
+      "Firebase",
+      "Zustand",
+      "Tailwind CSS",
+    ],
+    githubUrl: "https://github.com/YousifMHelal/trendy",
+    liveUrl: null,
+    size: "medium",
+    image: "/assets/projects/trendy.png",
+  },
+  {
+    id: 4,
+    title: "Cash Withdraw",
+    description:
+      "Full-stack financial operations dashboard with Arabic-first RTL UI for daily treasury tracking and WhatsApp-optimized PDF reporting.",
+    techStack: [
+      "React 19",
+      "Node.js",
+      "Express",
+      "Prisma",
+      "SQLite",
+      "Tailwind CSS",
+      "jsPDF",
+    ],
+    githubUrl: "https://github.com/YousifMHelal/cash-withdraw",
+    liveUrl: null,
+    size: "medium",
+    image: "/assets/projects/cash-withdraw.png",
+  },
+  {
+    id: 5,
+    title: "Momento",
+    description:
+      "Dynamic social media platform featuring post creation, likes, saves, user profiles, trending feed, and drag-and-drop file uploads.",
+    techStack: [
+      "React 18",
+      "TypeScript",
+      "Appwrite",
+      "React Query",
+      "Shadcn UI",
+      "Tailwind CSS",
+    ],
+    githubUrl: "https://github.com/YousifMHelal/momento",
+    liveUrl: null,
+    size: "medium",
+    image: "/assets/projects/momento.png",
+  },
+  {
+    id: 6,
+    title: "Postpeak",
+    description:
+      "Blogging platform with user authentication, post creation, comments, category filtering, and Firebase backend.",
+    techStack: [
+      "Next.js 13",
+      "JavaScript",
+      "Prisma",
+      "Firebase Auth",
+      "NextAuth",
+      "React Quill",
+    ],
+    githubUrl: "https://github.com/YousifMHelal/postpeak",
+    liveUrl: null,
+    size: "large",
+    image: "/assets/projects/postpeak.png",
   },
 ];
 

@@ -112,6 +112,44 @@
   animation: glitch 0.4s steps(1) 0.3s 1 forwards;
 }
 
+#projects-section {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bento-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: auto !important;
+  }
+
+  .bento-grid > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 300px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .bento-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+
+  .bento-grid > * {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    min-height: 260px !important;
+  }
+}
+
 @media (max-width: 766px) {
   .floating-hero-image {
     display: none !important;

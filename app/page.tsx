@@ -47,7 +47,7 @@ export default function Home() {
       return;
     }
 
-    gsap.set(floatingImageRef.current, { display: "block" });
+    gsap.set(floatingImageRef.current, { display: "block", opacity: 1 });
 
     const refreshTimeout = window.setTimeout(() => {
       ScrollTrigger.refresh();
@@ -132,7 +132,6 @@ export default function Home() {
       ScrollTrigger.create({
         trigger: "#about-section",
         start: "top top",
-        end: "bottom bottom",
         invalidateOnRefresh: true,
         onEnter: () => {
           const aboutRect = aboutSlot.getBoundingClientRect();
@@ -144,6 +143,8 @@ export default function Home() {
             width: aboutRect.width,
             height: aboutRect.height,
             scale: 1,
+            opacity: 1,
+            display: "block",
           });
         },
         onEnterBack: () => {
@@ -156,6 +157,8 @@ export default function Home() {
             width: aboutRect.width,
             height: aboutRect.height,
             scale: 1,
+            opacity: 1,
+            display: "block",
           });
         },
         onLeaveBack: () => {
@@ -169,13 +172,75 @@ export default function Home() {
 
           gsap.set(floatingImageRef.current, {
             position: "fixed",
-            top: heroRect.top + window.scrollY,
+            top: heroRect.top,
             left: heroRect.left,
             width: heroRect.width,
             height: heroRect.height,
+            opacity: 1,
+            display: "block",
           });
 
           travelTween.progress(0);
+        },
+      });
+
+      ScrollTrigger.create({
+        trigger: "#about-section",
+        start: "top bottom",
+        end: "bottom bottom",
+        onEnter: () => {
+          if (!floatingImageRef.current) {
+            return;
+          }
+
+          floatingImageRef.current.style.display = "block";
+          gsap.to(floatingImageRef.current, {
+            opacity: 1,
+            duration: 0.3,
+          });
+        },
+        onLeaveBack: () => {
+          if (!floatingImageRef.current) {
+            return;
+          }
+
+          floatingImageRef.current.style.display = "block";
+          gsap.to(floatingImageRef.current, {
+            opacity: 1,
+            duration: 0.2,
+          });
+        },
+      });
+
+      ScrollTrigger.create({
+        trigger: "#projects-section",
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => {
+          if (!floatingImageRef.current) {
+            return;
+          }
+
+          gsap.to(floatingImageRef.current, {
+            opacity: 0,
+            duration: 0.4,
+            onComplete: () => {
+              if (floatingImageRef.current) {
+                floatingImageRef.current.style.display = "none";
+              }
+            },
+          });
+        },
+        onLeaveBack: () => {
+          if (!floatingImageRef.current) {
+            return;
+          }
+
+          floatingImageRef.current.style.display = "block";
+          gsap.to(floatingImageRef.current, {
+            opacity: 1,
+            duration: 0.4,
+          });
         },
       });
     });
