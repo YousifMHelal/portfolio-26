@@ -1,29 +1,93 @@
-import { hero } from "@/data";
+"use client";
+
+import { useEffect, useState } from "react";
+
+const navLinks = [
+  { id: "hero-section", label: "HOME" },
+  { id: "about-section", label: "ABOUT" },
+  { id: "projects-section", label: "PROJECTS" },
+  { id: "skills-section", label: "SKILLS" },
+  { id: "contact-section", label: "CONTACT" },
+] as const;
 
 export function Navbar() {
+  const [activeSection, setActiveSection] = useState("hero-section");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const observers = navLinks.map(({ id }) => {
+      const el = document.getElementById(id);
+
+      if (!el) {
+        return null;
+      }
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
+        },
+        { threshold: 0.5 },
+      );
+
+      observer.observe(el);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => {
+        observer?.disconnect();
+      });
+    };
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    document
+      .getElementById(id)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-transparent">
+    <header
+      className={
+        isScrolled
+          ? "fixed left-1/2 top-4 z-100 w-full max-w-7xl -translate-x-1/2 rounded-2xl  bg-black/35 px-6 py-2 backdrop-blur-md transition-all duration-300"
+          : "fixed left-1/2 top-6 z-100 w-full max-w-7xl -translate-x-1/2 px-6 transition-all duration-300"
+      }>
       <nav
         aria-label="Primary"
-        className="mx-auto flex w-full max-w-7xl items-center overflow-x-auto px-6 py-5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        <div className="flex min-w-max items-center gap-2 sm:gap-3">
-          {hero.navLinks.map((item) => {
-            const active = item.active;
+        className="mx-auto flex w-max items-center gap-3 md:gap-5">
+        {navLinks.map(({ id, label }) => {
+          const active = activeSection === id;
 
-            return (
-              <a
-                key={item.label}
-                href={item.href}
-                className={
-                  active
-                    ? "rounded-full border border-border bg-surface px-3 py-2 text-[11px] font-medium uppercase tracking-[1.8px] text-white transition duration-300 sm:px-4 sm:text-[13px] sm:tracking-[2px]"
-                    : "rounded-full px-3 py-2 text-[11px] font-medium uppercase tracking-[1.8px] text-white transition duration-300 hover:text-accent sm:px-4 sm:text-[13px] sm:tracking-[2px]"
-                }>
-                {item.label}
-              </a>
-            );
-          })}
-        </div>
+          return (
+            <button
+              key={id}
+              type="button"
+              onClick={() => scrollToSection(id)}
+              className={
+                active
+                  ? "rounded-full border border-border bg-surface px-4 py-2 text-[11px] font-semibold uppercase tracking-[2px] text-text transition-all duration-300 md:px-6 md:text-[13px]"
+                  : "rounded-full border border-transparent px-3 py-2 text-[11px] font-medium uppercase tracking-[2px] text-text-muted transition-all duration-300 hover:text-accent md:px-4 md:text-[13px]"
+              }>
+              {label}
+            </button>
+          );
+        })}
       </nav>
     </header>
   );

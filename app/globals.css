@@ -50,6 +50,10 @@
     overflow-x: hidden;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   ::selection {
     background: var(--color-accent);
     color: #000000;
@@ -106,4 +110,86 @@
 
 .glitch-name {
   animation: glitch 0.4s steps(1) 0.3s 1 forwards;
+}
+
+@media (max-width: 766px) {
+  .floating-hero-image {
+    display: none !important;
+  }
+
+  #hero-section {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-right-column {
+    display: block !important;
+    flex: none !important;
+    width: 100% !important;
+    min-height: 380px !important;
+    height: 380px !important;
+    clip-path: none !important;
+  }
+
+  .hero-left-column {
+    padding: 90px 20px 32px !important;
+  }
+
+  #about-section {
+    grid-template-columns: 1fr !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  #about-image-receiver,
+  #about-image-slot,
+  .about-image-fallback {
+    display: none !important;
+  }
+
+  .hero-image-fallback,
+  .about-image-fallback {
+    height: 380px !important;
+    min-height: unset !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  .hero-image-fallback img,
+  .about-image-fallback img {
+    object-fit: cover !important;
+    object-position: center top !important;
+    height: 380px !important;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+  .hero-right-column {
+    min-height: 62svh !important;
+    height: 62svh !important;
+    clip-path: none !important;
+  }
+
+  #hero-image-slot,
+  #about-image-slot {
+    height: 62svh !important;
+    min-height: 480px;
+  }
+
+  .hero-left-column {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
+
+@media (min-width: 767px) {
+  .hero-image-fallback {
+    display: none;
+  }
+
+  .about-image-fallback {
+    display: none;
+  }
 }
