@@ -73,3 +73,14 @@ export interface TimelineItem {
   subtitle: string;
   description: string;
 }
+
+export interface ContactData {
+  email: string;
+  github: string;
+  githubUsername: string;
+  linkedin: string;
+  linkedinName: string;
+  whatsapp: string;
+  facebook: string;
+  cvPath: string;
+}

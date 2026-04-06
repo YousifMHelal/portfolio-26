@@ -1,5 +1,6 @@
 import type {
   AboutData,
+  ContactData,
   HeroContent,
   PersonalInfo,
   Project,
@@ -252,3 +253,14 @@ export const skills: SkillItem[] = [
     category: "",
   },
 ];
+
+export const contactData: ContactData = {
+  email: "yousifmamdouh.dev@gmail.com",
+  github: "https://github.com/YousifMHelal",
+  githubUsername: "@YousifMHelal",
+  linkedin: "https://www.linkedin.com/in/yousifmhelal/",
+  linkedinName: "Yousif Mamdouh",
+  whatsapp: "https://wa.me/+201150509675",
+  facebook: "https://www.facebook.com/YousifM.Helal",
+  cvPath: "/assets/cv.pdf",
+};

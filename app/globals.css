@@ -150,6 +150,32 @@
   }
 }
 
+@media (max-width: 1023px) {
+  #contact-section .contact-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: auto !important;
+  }
+
+  #contact-section .contact-grid > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 240px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #contact-section .contact-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+
+  #contact-section .contact-grid > * {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    min-height: 200px !important;
+  }
+}
+
 @media (max-width: 766px) {
   .floating-hero-image {
     display: none !important;
