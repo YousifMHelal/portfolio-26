@@ -20,3 +20,34 @@ export interface SkillItem {
   name: string;
   category: string;
 }
+
+export interface HeroNavLink {
+  label: string;
+  href: string;
+  active?: boolean;
+}
+
+export interface HeroSocialLink {
+  label: string;
+  href: string;
+  monogram: string;
+}
+
+export interface HeroCTA {
+  label: string;
+  href: string;
+  variant: "solid" | "outline";
+}
+
+export interface HeroContent {
+  name: string;
+  role: string;
+  bio: string;
+  backgroundText: string;
+  signatureImage: string;
+  portraitImage: string;
+  footerNote: string;
+  navLinks: HeroNavLink[];
+  socialLinks: HeroSocialLink[];
+  ctas: HeroCTA[];
+}

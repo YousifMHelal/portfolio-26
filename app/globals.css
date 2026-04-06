@@ -3,34 +3,107 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-surface-3: var(--color-surface-3);
+  --color-accent: var(--color-accent);
+  --color-accent-dim: var(--color-accent-dim);
+  --color-accent-glow: var(--color-accent-glow);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-dim: var(--color-text-dim);
+  --color-border: var(--color-border);
+  --color-border-light: var(--color-border-light);
+  --color-watermark: var(--color-watermark);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --muted: #f8fafc;
-  --border: #e2e8f0;
-}
-
-.dark {
-  --background: #020617;
-  --foreground: #f8fafc;
-  --muted: #0f172a;
-  --border: #1e293b;
 }
 
 @layer base {
   * {
-    @apply border-border;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
+
+  :root {
+    --color-bg: #000000;
+    --color-surface: #0d0d0d;
+    --color-surface-2: #111111;
+    --color-surface-3: #1a1a1a;
+    --color-accent: #00d4ff;
+    --color-accent-dim: #00a3c4;
+    --color-accent-glow: rgba(0, 212, 255, 0.08);
+    --color-text: #ffffff;
+    --color-text-muted: #888888;
+    --color-text-dim: #444444;
+    --color-border: #1a1a1a;
+    --color-border-light: #2a2a2a;
+    --color-watermark: #111111;
+  }
+
   html,
   body {
-    @apply bg-background text-foreground font-sans;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    overflow-x: hidden;
   }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #000000;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-surface-3);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+    transition: color 0.3s ease;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 0 red, -2px 0 cyan;
+  }
+  20% {
+    text-shadow: -2px 0 red, 2px 0 cyan;
+  }
+  40% {
+    text-shadow: 2px 2px red, -2px -2px cyan;
+  }
+  60% {
+    text-shadow: -1px 0 red, 1px 0 cyan;
+  }
+  80% {
+    text-shadow: 1px -1px red, -1px 1px cyan;
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+.glitch-name {
+  animation: glitch 0.4s steps(1) 0.3s 1 forwards;
 }
