@@ -12,7 +12,7 @@ import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
 import { ProjectsSection } from "@/components/sections/projects";
 import { SkillsSection } from "@/components/sections/skills";
-import { ContactSection } from "@/components/sections/contact";
+import { Contact } from "@/components/sections/Contact";
 import { hero } from "@/data";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -285,7 +285,7 @@ export default function Home() {
       <AboutSection />
       <ProjectsSection />
       <SkillsSection />
-      <ContactSection />
+      <Contact />
     </main>
   );
 }

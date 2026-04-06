@@ -18,7 +18,7 @@ export function ProjectsSection() {
             fontSize: "18px",
             letterSpacing: "4px",
           }}>
-          {"// PROJECTS"}
+          {"## PROJECTS"}
         </span>
         <h2
           style={{
