@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/theme-provider";
-// @ts-expect-error Next.js app router supports global CSS side-effect import here.
 import "./globals.css";
 
 const inter = Inter({
@@ -17,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Yousif Mamdouh | Portfolio",
   description: "Dark mode portfolio landing page for Yousif Mamdouh.",
+};
+
+export const viewport: Viewport = {
   themeColor: "#000000",
 };
 

@@ -198,6 +198,53 @@ export const projects: Project[] = [
   },
 ];
 
+export const skillSlugs = [
+  // Languages
+  "typescript",
+  "javascript",
+
+  // Frontend
+  "react",
+  "nextdotjs",
+  "html5",
+  "css3",
+  "bootstrap",
+  "tailwindcss",
+  "reactrouter",
+
+  // Backend
+  "nodedotjs",
+  "express",
+
+  // Databases
+  "mongodb",
+  "mysql",
+  "prisma",
+  "firebase",
+
+  // CMS & Other
+  "wordpress",
+
+  // Auth & Payments
+  "clerk",
+  "stripe",
+
+  // State Management
+  "zustand",
+
+  // Cloud & Deployment
+  "vercel",
+  "docker",
+
+  // Tools & Dev
+  "git",
+  "github",
+  "visualstudiocode",
+  "figma",
+  "vite",
+  "prettier",
+]
+
 export const skills: SkillItem[] = [
   {
     id: "skill-1",
