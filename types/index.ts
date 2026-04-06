@@ -23,6 +23,13 @@ export interface SkillItem {
   category: string;
 }
 
+export interface Testimonial {
+  id: number;
+  name: string;
+  quote: string;
+  featured: boolean;
+}
+
 export interface HeroNavLink {
   label: string;
   href: string;

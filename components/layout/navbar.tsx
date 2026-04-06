@@ -7,6 +7,7 @@ const navLinks = [
   { id: "about-section", label: "ABOUT" },
   { id: "projects-section", label: "PROJECTS" },
   { id: "skills-section", label: "SKILLS" },
+  { id: "testimonials-section", label: "TESTIMONIALS" },
   { id: "contact-section", label: "CONTACT" },
 ] as const;
 
@@ -17,45 +18,33 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
+
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      let current = navLinks[0].id;
+
+      navLinks.forEach(({ id }) => {
+        const el = document.getElementById(id);
+
+        if (el && marker >= el.offsetTop) {
+          current = id;
+        }
+      });
+
+      setActiveSection((prev) => (prev === current ? prev : current));
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const observers = navLinks.map(({ id }) => {
-      const el = document.getElementById(id);
-
-      if (!el) {
-        return null;
-      }
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { threshold: 0.5 },
-      );
-
-      observer.observe(el);
-      return observer;
-    });
-
-    return () => {
-      observers.forEach((observer) => {
-        observer?.disconnect();
-      });
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
   const scrollToSection = (id: string) => {
+    setActiveSection(id);
     document
       .getElementById(id)
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -81,8 +70,8 @@ export function Navbar() {
               onClick={() => scrollToSection(id)}
               className={
                 active
-                  ? "rounded-full border border-border bg-surface px-4 py-2 text-[11px] font-semibold uppercase tracking-[2px] text-text transition-all duration-300 md:px-6 md:text-[13px]"
-                  : "rounded-full border border-transparent px-3 py-2 text-[11px] font-medium uppercase tracking-[2px] text-text-muted transition-all duration-300 hover:text-accent md:px-4 md:text-[13px]"
+                  ? "cursor-pointer rounded-full border border-border bg-surface px-4 py-2 text-[11px] font-semibold uppercase tracking-[2px] text-text transition-all duration-300 md:px-6 md:text-[13px]"
+                  : "cursor-pointer rounded-full border border-transparent px-3 py-2 text-[11px] font-medium uppercase tracking-[2px] text-text-muted transition-all duration-300 hover:text-accent md:px-4 md:text-[13px]"
               }>
               {label}
             </button>
