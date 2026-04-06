@@ -51,3 +51,23 @@ export interface HeroContent {
   socialLinks: HeroSocialLink[];
   ctas: HeroCTA[];
 }
+
+export interface AboutStatItem {
+  value: string;
+  label: string;
+}
+
+export interface AboutData {
+  label: string;
+  heading: string;
+  bio: string;
+  journeyTitle: string;
+  stats: AboutStatItem[];
+}
+
+export interface TimelineItem {
+  year: string;
+  title: string;
+  subtitle: string;
+  description: string;
+}

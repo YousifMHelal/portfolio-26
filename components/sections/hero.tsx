@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 
-import { Navbar } from "@/components/layout/navbar";
-import { PaginationDots } from "@/components/sections/pagination-dots";
 import { hero } from "@/data";
 
 const containerVariants = {
@@ -71,7 +69,7 @@ export function HeroSection() {
 
   return (
     <section
-      id="home"
+      id="hero-section"
       className="relative min-h-screen overflow-hidden bg-bg text-white">
       <div
         aria-hidden="true"
@@ -93,10 +91,8 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto min-h-screen max-w-7xl px-6">
         <div className="flex min-h-screen flex-col md:flex-row">
-          <div className="relative flex min-h-[58vh] flex-1 overflow-hidden md:min-h-screen md:w-[55%]">
+          <div className="hero-left-column relative flex min-h-[58vh] flex-1 overflow-hidden md:min-h-screen md:w-[55%]">
             <div className="relative z-10 flex w-full flex-col pt-5 md:pt-6">
-              <Navbar />
-
               <motion.div
                 className="flex flex-1 items-center pb-10 pt-12 md:pb-14 md:pt-8"
                 variants={containerVariants}
@@ -104,9 +100,13 @@ export function HeroSection() {
                 animate="visible">
                 <div className="relative max-w-2xl">
                   <motion.p
-                    className="max-w-sm text-[0.74rem] font-medium uppercase tracking-[0.34em] text-white"
+                    className="max-w-sm text-[0.9rem] font-medium uppercase tracking-[0.34em] text-white"
                     variants={itemVariants}>
-                    {hero.role}
+                    <span className="font-mono text-border-light">&lt;</span>
+                    <span className="font-mono text-accent">
+                      {hero.role.replace(" ", "_")}
+                    </span>
+                    <span className="font-mono text-border-light"> /&gt;</span>
                   </motion.p>
 
                   <motion.h1
@@ -159,25 +159,23 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative min-h-[42vh] flex-1 overflow-hidden md:min-h-screen md:w-[45%] md:[clip-path:polygon(25%_0%,100%_0%,75%_100%,0%_100%)]">
-            <div className="pointer-events-none absolute inset-0 z-10 hidden border border-border md:block md:[clip-path:polygon(25%_0%,100%_0%,75%_100%,0%_100%)]" />
-            <Image
-              src={hero.portraitImage}
-              alt="Yousif Mamdouh portrait"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 45vw"
-              className="object-cover object-[65%_10%] opacity-95"
-            />
-          </div>
-        </div>
-      </div>
-
-      <PaginationDots />
-
-      <div className="pointer-events-none absolute bottom-6 right-6 z-10 hidden text-right text-dim md:block">
-        <div className="text-[0.75rem] font-medium uppercase tracking-[0.32em]">
-          {hero.footerNote}
+          <motion.div
+            id="hero-image"
+            className="hero-right-column relative min-h-[42vh] flex-1 overflow-hidden md:min-h-screen md:w-[45%] md:[clip-path:polygon(25%_0%,100%_0%,75%_100%,0%_100%)]">
+            <div
+              id="hero-image-slot"
+              className="relative h-full w-full overflow-hidden">
+              <div className="hero-image-fallback relative h-full w-full">
+                <Image
+                  src={hero.portraitImage}
+                  alt="Yousif Mamdouh"
+                  fill
+                  priority
+                  style={{ objectFit: "cover", objectPosition: "center top" }}
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

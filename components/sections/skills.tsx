@@ -1,3 +1,3 @@
 export function SkillsSection() {
-  return <section id="skills">Skills</section>;
+  return <section id="skills-section">Skills</section>;
 }
