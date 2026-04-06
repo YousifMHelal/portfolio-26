@@ -6,13 +6,15 @@ export interface PersonalInfo {
   summary: string;
 }
 
-export interface ProjectItem {
-  id: string;
+export interface Project {
+  id: number;
   title: string;
   description: string;
   techStack: string[];
-  githubUrl?: string;
-  liveUrl?: string;
+  githubUrl: string;
+  liveUrl: string | null;
+  size: "large" | "medium";
+  image: string;
 }
 
 export interface SkillItem {
