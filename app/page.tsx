@@ -183,7 +183,7 @@ export default function Home() {
       const travelTween = gsap.to(floatingEl, {
         ease: "none",
         scrollTrigger: {
-          trigger: "#hero-section",
+          trigger: "#hero",
           start: "top top",
           end: "bottom top",
           scrub: 1.5,
@@ -224,7 +224,7 @@ export default function Home() {
       });
 
       ScrollTrigger.create({
-        trigger: "#about-section",
+        trigger: "#about",
         start: "top top",
         invalidateOnRefresh: true,
         onEnter: () => {
@@ -279,7 +279,7 @@ export default function Home() {
       });
 
       ScrollTrigger.create({
-        trigger: "#about-section",
+        trigger: "#about",
         start: "top bottom",
         end: "bottom bottom",
         onEnter: () => {
@@ -307,7 +307,7 @@ export default function Home() {
       });
 
       ScrollTrigger.create({
-        trigger: "#projects-section",
+        trigger: "#projects",
         start: "top bottom",
         end: "bottom top",
         onEnter: () => {

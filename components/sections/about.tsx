@@ -12,7 +12,7 @@ const reveal = {
 
 export function AboutSection() {
   return (
-    <section id="about-section" className="w-full min-h-screen bg-bg">
+    <section id="about" className="w-full min-h-screen bg-bg">
       <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
         <div
           id="about-image-receiver"

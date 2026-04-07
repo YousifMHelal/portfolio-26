@@ -138,7 +138,7 @@
   animation: typing-cursor-blink 1s steps(1) infinite;
 }
 
-#projects-section {
+#projects {
   width: 100%;
   box-sizing: border-box;
 }
@@ -177,12 +177,12 @@
 }
 
 @media (max-width: 1023px) {
-  #contact-section .contact-grid {
+  #contact .contact-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     grid-template-rows: auto !important;
   }
 
-  #contact-section .contact-grid > * {
+  #contact .contact-grid > * {
     grid-column: auto !important;
     grid-row: auto !important;
     min-height: 240px !important;
@@ -190,12 +190,12 @@
 }
 
 @media (max-width: 767px) {
-  #contact-section .contact-grid {
+  #contact .contact-grid {
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
   }
 
-  #contact-section .contact-grid > * {
+  #contact .contact-grid > * {
     grid-column: 1 / -1 !important;
     grid-row: auto !important;
     min-height: 200px !important;
@@ -207,7 +207,7 @@
     display: none !important;
   }
 
-  #hero-section {
+  #hero {
     grid-template-columns: 1fr !important;
     min-height: auto !important;
     padding-bottom: 0 !important;
@@ -227,7 +227,7 @@
     padding: 90px 20px 32px !important;
   }
 
-  #about-section {
+  #about {
     grid-template-columns: 1fr !important;
     padding-top: 0 !important;
     margin-top: 0 !important;

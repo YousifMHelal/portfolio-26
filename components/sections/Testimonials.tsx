@@ -197,7 +197,7 @@ function SideCard({ testimonial, index }: SideCardProps) {
 export function Testimonials() {
   return (
     <section
-      id="testimonials-section"
+      id="testimonials"
       style={{
         padding: "80px clamp(24px, 5vw, 80px)",
         background: "var(--color-bg)",

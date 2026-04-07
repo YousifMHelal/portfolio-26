@@ -11,28 +11,27 @@ import {
 } from "lucide-react";
 
 const desktopNavLinks = [
-  { id: "hero-section", label: "HOME" },
-  { id: "about-section", label: "ABOUT" },
-  { id: "projects-section", label: "PROJECTS" },
-  { id: "skills-section", label: "SKILLS" },
-  { id: "testimonials-section", label: "TESTIMONIALS" },
-  { id: "contact-section", label: "CONTACT" },
+  { id: "hero", label: "HOME" },
+  { id: "about", label: "ABOUT" },
+  { id: "projects", label: "PROJECTS" },
+  { id: "skills", label: "SKILLS" },
+  { id: "testimonials", label: "TESTIMONIALS" },
+  { id: "contact", label: "CONTACT" },
 ] as const;
 
 const mobileNavLinks = [
-  { id: "hero-section", label: "Home", icon: House },
-  { id: "about-section", label: "About", icon: UserRound },
-  { id: "projects-section", label: "Projects", icon: BriefcaseBusiness },
-  { id: "skills-section", label: "Skills", icon: Code2 },
-  { id: "testimonials-section", label: "Reviews", icon: MessageSquareQuote },
-  { id: "contact-section", label: "Contact", icon: Mail },
+  { id: "hero", label: "Home", icon: House },
+  { id: "about", label: "About", icon: UserRound },
+  { id: "projects", label: "Projects", icon: BriefcaseBusiness },
+  { id: "skills", label: "Skills", icon: Code2 },
+  { id: "testimonials", label: "Reviews", icon: MessageSquareQuote },
+  { id: "contact", label: "Contact", icon: Mail },
 ] as const;
 
 type NavSectionId = (typeof desktopNavLinks)[number]["id"];
 
 export function Navbar() {
-  const [activeSection, setActiveSection] =
-    useState<NavSectionId>("hero-section");
+  const [activeSection, setActiveSection] = useState<NavSectionId>("hero");
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

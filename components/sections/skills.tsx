@@ -26,7 +26,7 @@ export function SkillsSection() {
 
   return (
     <section
-      id="skills-section"
+      id="skills"
       style={{
         width: "100%",
         minHeight: "100vh",

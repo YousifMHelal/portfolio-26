@@ -5,41 +5,37 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const sections = [
-  { id: "hero-section", label: "Home" },
-  { id: "about-section", label: "About" },
-  { id: "projects-section", label: "Projects" },
-  { id: "skills-section", label: "Skills" },
-  { id: "testimonials-section", label: "Testimonials" },
-  { id: "contact-section", label: "Contact" },
-  { id: "footer-section", label: "Footer" },
+  { id: "hero", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "testimonials", label: "Testimonials" },
+  { id: "contact", label: "Contact" },
+  { id: "footer", label: "Footer" },
 ] as const;
 
 type SectionId = (typeof sections)[number]["id"];
 
 export default function DotNav() {
-  const [activeSection, setActiveSection] = useState("hero-section");
+  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
     const handleScroll = () => {
       const marker = window.scrollY + window.innerHeight * 0.35;
-      const footer = document.getElementById("footer-section");
+      const footer = document.getElementById("footer");
 
       if (footer) {
         const footerRect = footer.getBoundingClientRect();
 
         if (footerRect.top < window.innerHeight && footerRect.bottom > 0) {
-          setActiveSection((prev) =>
-            prev === "footer-section" ? prev : "footer-section",
-          );
+          setActiveSection((prev) => (prev === "footer" ? prev : "footer"));
           return;
         }
       }
 
       let current: SectionId = sections[0].id;
 
-      const visibleSections = sections.filter(
-        ({ id }) => id !== "footer-section",
-      );
+      const visibleSections = sections.filter(({ id }) => id !== "footer");
 
       visibleSections.forEach(({ id }) => {
         const el = document.getElementById(id);

@@ -4,7 +4,7 @@ import { projects } from "@/data";
 export function ProjectsSection() {
   return (
     <section
-      id="projects-section"
+      id="projects"
       style={{
         padding: "80px clamp(24px, 5vw, 80px)",
         background: "var(--color-bg)",

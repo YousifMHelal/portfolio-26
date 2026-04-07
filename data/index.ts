@@ -16,7 +16,7 @@ export const hero: HeroContent = {
   portraitImage: "/assets/hero-reference.png",
   footerNote: "Portfolio 2026",
   navLinks: [
-    { label: "Home", href: "#home", active: true },
+    { label: "Home", href: "#hero", active: true },
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" },

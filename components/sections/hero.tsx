@@ -69,7 +69,7 @@ export function HeroSection() {
 
   return (
     <section
-      id="hero-section"
+      id="hero"
       className="relative min-h-screen overflow-hidden bg-bg text-white">
       <div
         aria-hidden="true"
@@ -135,7 +135,7 @@ export function HeroSection() {
                   </motion.div>
 
                   <motion.div
-                    className="flex flex-wrap items-center gap-4"
+                    className="flex flex-wrap items-center gap-4 ms-1"
                     variants={itemVariants}>
                     {hero.ctas.map((cta) => {
                       const isPrimary = cta.variant === "solid";

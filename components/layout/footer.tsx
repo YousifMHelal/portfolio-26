@@ -4,12 +4,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const navLinks = [
-  { id: "hero-section", label: "Home" },
-  { id: "about-section", label: "About" },
-  { id: "projects-section", label: "Projects" },
-  { id: "skills-section", label: "Skills" },
-  { id: "testimonials-section", label: "Testimonials" },
-  { id: "contact-section", label: "Contact" },
+  { id: "hero", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "testimonials", label: "Testimonials" },
+  { id: "contact", label: "Contact" },
 ];
 
 const socialLinks = [
@@ -36,7 +36,7 @@ const scrollToSection = (id: string) => {
 export function Footer() {
   return (
     <footer
-      id="footer-section"
+      id="footer"
       style={{
         width: "100%",
         background: "var(--color-bg)",
