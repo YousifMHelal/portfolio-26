@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { Pacifico } from "next/font/google";
 
 import DotNav from "@/components/layout/DotNav";
-import { Footer } from "@/components/layout/Footer";
+import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
@@ -19,9 +20,74 @@ import { hero } from "@/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const loadingWord = "Welcome";
+const loadingColors = [
+  "var(--color-accent)",
+  "#7dd3fc",
+  "var(--color-accent-dim)",
+  "var(--color-text)",
+  "var(--color-text-muted)",
+  "#38bdf8",
+  "#f8fafc",
+];
+
+const pacifico = Pacifico({
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export default function Home() {
   const floatingImageRef = useRef<HTMLDivElement | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [typedWelcome, setTypedWelcome] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const originalScrollRestoration = window.history.scrollRestoration;
+
+    window.history.scrollRestoration = "manual";
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+    return () => {
+      window.history.scrollRestoration = originalScrollRestoration;
+    };
+  }, []);
+
+  useEffect(() => {
+    let typingInterval: number | undefined;
+    let revealTimeout: number | undefined;
+
+    const startTimeout = window.setTimeout(() => {
+      let currentIndex = 0;
+
+      typingInterval = window.setInterval(() => {
+        currentIndex += 1;
+        setTypedWelcome(loadingWord.slice(0, currentIndex));
+
+        if (currentIndex >= loadingWord.length) {
+          if (typingInterval) {
+            window.clearInterval(typingInterval);
+          }
+
+          revealTimeout = window.setTimeout(() => {
+            setIsLoading(false);
+          }, 550);
+        }
+      }, 120);
+    }, 180);
+
+    return () => {
+      window.clearTimeout(startTimeout);
+
+      if (typingInterval) {
+        window.clearInterval(typingInterval);
+      }
+
+      if (revealTimeout) {
+        window.clearTimeout(revealTimeout);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 767px)");
@@ -40,6 +106,10 @@ export default function Home() {
 
   useEffect(() => {
     if (!floatingImageRef.current) {
+      return;
+    }
+
+    if (isLoading) {
       return;
     }
 
@@ -253,43 +323,70 @@ export default function Home() {
       window.removeEventListener("load", handleWindowLoad);
       ScrollTrigger.killAll();
     };
-  }, [isDesktop]);
+  }, [isDesktop, isLoading]);
 
   return (
     <main className="min-h-screen bg-bg text-white">
-      <Navbar />
-      <DotNav />
+      {isLoading ? (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black"
+          style={{ zIndex: 1000 }}>
+          <div className="flex flex-col items-center gap-4 px-6 text-center">
+            <div
+              className={`typing-welcome ${pacifico.className} flex items-end whitespace-nowrap text-[clamp(3.5rem,12vw,8rem)] font-semibold leading-none`}
+              aria-label={loadingWord}>
+              {typedWelcome.split("").map((character, index) => (
+                <span
+                  key={`${character}-${index}`}
+                  style={{
+                    color: loadingColors[index % loadingColors.length],
+                  }}>
+                  {character}
+                </span>
+              ))}
+              <span aria-hidden="true" className="typing-cursor" />
+            </div>
+          </div>
+        </div>
+      ) : null}
 
-      <div
-        ref={floatingImageRef}
-        className="floating-hero-image pointer-events-none"
-        style={{
-          overflow: "hidden",
-          background: "transparent",
-          position: "fixed",
-          borderRadius: 0,
-        }}>
-        <Image
-          src={hero.portraitImage}
-          alt="Yousif Mamdouh"
-          fill
-          priority
-          sizes="(max-width: 768px) 100vw, 45vw"
-          style={{
-            objectFit: "cover",
-            objectPosition: "center top",
-            background: "transparent",
-          }}
-        />
-      </div>
+      {!isLoading ? (
+        <>
+          <Navbar />
+          <DotNav />
 
-      <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <Testimonials />
-      <Contact />
-      <Footer />
+          <div
+            ref={floatingImageRef}
+            className="floating-hero-image pointer-events-none"
+            style={{
+              overflow: "hidden",
+              background: "transparent",
+              position: "fixed",
+              borderRadius: 0,
+            }}>
+            <Image
+              src={hero.portraitImage}
+              alt="Yousif Mamdouh"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 45vw"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center top",
+                background: "transparent",
+              }}
+            />
+          </div>
+
+          <HeroSection />
+          <AboutSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <Testimonials />
+          <Contact />
+          <Footer />
+        </>
+      ) : null}
     </main>
   );
 }

@@ -29,16 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${geistMono.variable} antialiased`}
-        style={{
-          backgroundColor: "var(--color-bg)",
-          color: "var(--color-text)",
-        }}>
+      <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange>
           {children}
         </ThemeProvider>

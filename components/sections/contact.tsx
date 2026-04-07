@@ -54,6 +54,17 @@ const gridVariants = {
 export function Contact() {
   const [isCVHovered, setIsCVHovered] = useState(false);
 
+  const downloadCv = () => {
+    const link = document.createElement("a");
+
+    link.href = contactData.cvPath;
+    link.download = "Yousif_Mamdouh_CV.pdf";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
   const handleEmailClick = () => {
     const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&to=${contactData.email}`;
     const openedWindow = window.open(gmailComposeUrl, "_blank");
@@ -443,7 +454,7 @@ export function Contact() {
           onHoverStart={() => setIsCVHovered(true)}
           onHoverEnd={() => setIsCVHovered(false)}
           onClick={() => {
-            window.open(contactData.cvPath, "_blank", "noopener,noreferrer");
+            downloadCv();
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = "var(--color-accent)";
@@ -496,16 +507,11 @@ export function Contact() {
               Get a copy of my resume
             </p>
 
-            {/* Place your CV PDF at public/assets/cv.pdf */}
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                window.open(
-                  contactData.cvPath,
-                  "_blank",
-                  "noopener,noreferrer",
-                );
+                downloadCv();
               }}
               style={{
                 marginTop: "20px",

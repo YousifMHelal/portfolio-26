@@ -2,11 +2,9 @@ import type {
   AboutData,
   ContactData,
   HeroContent,
-  PersonalInfo,
   Project,
-  SkillItem,
   Testimonial,
-  TimelineItem,
+  TimelineItem
 } from "@/types";
 
 export const hero: HeroContent = {
@@ -75,14 +73,6 @@ export const timeline: TimelineItem[] = [
       "Completed numerous online courses and participated in internships, continuously improving skills in frontend development, problem-solving, and modern technologies through hands-on projects and real-world practice.",
   },
 ];
-
-export const personalInfo: PersonalInfo = {
-  name: "",
-  role: "",
-  location: "",
-  email: "",
-  summary: "",
-};
 
 export const projects: Project[] = [
   {
@@ -247,14 +237,6 @@ export const skillSlugs = [
   "prettier",
 ]
 
-export const skills: SkillItem[] = [
-  {
-    id: "skill-1",
-    name: "",
-    category: "",
-  },
-];
-
 export const testimonials: Testimonial[] = [
   {
     id: 1,
@@ -287,5 +269,5 @@ export const contactData: ContactData = {
   linkedinName: "Yousif Mamdouh",
   whatsapp: "https://wa.me/+201150509675",
   facebook: "https://www.facebook.com/YousifM.Helal",
-  cvPath: "/assets/cv.pdf",
+  cvPath: "/assets/Yousif%20Mamdouh.pdf",
 };

@@ -20,9 +20,26 @@ export default function DotNav() {
   useEffect(() => {
     const handleScroll = () => {
       const marker = window.scrollY + window.innerHeight * 0.35;
+      const footer = document.getElementById("footer-section");
+
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+
+        if (footerRect.top < window.innerHeight && footerRect.bottom > 0) {
+          setActiveSection((prev) =>
+            prev === "footer-section" ? prev : "footer-section",
+          );
+          return;
+        }
+      }
+
       let current = sections[0].id;
 
-      sections.forEach(({ id }) => {
+      const visibleSections = sections.filter(
+        ({ id }) => id !== "footer-section",
+      );
+
+      visibleSections.forEach(({ id }) => {
         const el = document.getElementById(id);
 
         if (el && marker >= el.offsetTop) {

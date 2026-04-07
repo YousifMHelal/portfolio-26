@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 import type { Project } from "@/types";
 
@@ -42,7 +43,30 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       onHoverEnd={() => setIsHovered(false)}
       onFocus={() => setIsHovered(true)}
       onBlur={() => setIsHovered(false)}>
-      <div aria-hidden="true" className="absolute inset-0" style={{ background: gradient }} />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{ background: gradient }}
+      />
+
+      <div className="absolute inset-0">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          style={{ objectFit: "cover", objectPosition: "center top" }}
+        />
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.42) 48%, rgba(0, 0, 0, 0.15) 100%)",
+        }}
+      />
 
       <div
         className="absolute inset-x-0 bottom-0"

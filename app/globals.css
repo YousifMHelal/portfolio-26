@@ -112,6 +112,32 @@
   animation: glitch 0.4s steps(1) 0.3s 1 forwards;
 }
 
+@keyframes typing-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.typing-welcome {
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 28px rgba(255, 255, 255, 0.08);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 0.12em;
+  height: 0.78em;
+  margin-left: 0.08em;
+  border-radius: 999px;
+  background: currentColor;
+  animation: typing-cursor-blink 1s steps(1) infinite;
+}
+
 #projects-section {
   width: 100%;
   box-sizing: border-box;
