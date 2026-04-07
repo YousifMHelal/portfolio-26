@@ -14,6 +14,8 @@ const sections = [
   { id: "footer-section", label: "Footer" },
 ] as const;
 
+type SectionId = (typeof sections)[number]["id"];
+
 export default function DotNav() {
   const [activeSection, setActiveSection] = useState("hero-section");
 
@@ -33,7 +35,7 @@ export default function DotNav() {
         }
       }
 
-      let current = sections[0].id;
+      let current: SectionId = sections[0].id;
 
       const visibleSections = sections.filter(
         ({ id }) => id !== "footer-section",

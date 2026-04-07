@@ -11,6 +11,8 @@ const navLinks = [
   { id: "contact-section", label: "CONTACT" },
 ] as const;
 
+type NavSectionId = (typeof navLinks)[number]["id"];
+
 export function Navbar() {
   const [activeSection, setActiveSection] = useState("hero-section");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,7 +22,7 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 10);
 
       const marker = window.scrollY + window.innerHeight * 0.35;
-      let current = navLinks[0].id;
+      let current: NavSectionId = navLinks[0].id;
 
       navLinks.forEach(({ id }) => {
         const el = document.getElementById(id);
