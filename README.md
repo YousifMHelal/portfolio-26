@@ -12,7 +12,7 @@
 
 [Mobile View](./public/assets/screenshot-mobile.png)
 
-[Live Demo](https://portfolio-26-42v77jt17-yousif-mamdouhs-projects.vercel.app/)
+[Live Demo](https://www.yousifmamdouh.tech/)
 
 ---
 

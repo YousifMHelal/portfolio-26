@@ -259,7 +259,7 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const contactData: ContactData = {
-  email: "yousifmamdouh.dev@gmail.com",
+  email: "contact@yousifmamdouh.tech",
   github: "https://github.com/YousifMHelal",
   githubUsername: "@YousifMHelal",
   linkedin: "https://www.linkedin.com/in/yousifmhelal/",
