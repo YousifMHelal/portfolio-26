@@ -10,7 +10,7 @@ import type {
 export const hero: HeroContent = {
   name: "Yousif Mamdouh",
   role: "Web Developer",
-  bio: "I build clean, responsive interfaces with strong visual rhythm, thoughtful spacing, and smooth interactions. My work focuses on turning ideas into polished frontend experiences that feel fast and intentional.",
+  bio: "Frontend Developer crafting modern, scalable web applications with React, Next.js, and TypeScript. I turn complex ideas into fast, intuitive, and production-ready products.",
   backgroundText: "YOUSIF MAMDOUH",
   signatureImage: "/assets/signature.png",
   portraitImage: "/assets/hero-reference.png",
@@ -34,7 +34,13 @@ export const hero: HeroContent = {
 export const about: AboutData = {
   label: "ABOUT ME",
   heading: "Who is Yousif?",
-  bio: "I'm a passionate web developer with 1-2 years of hands-on experience building modern, interactive web applications. I specialize in React and Next.js, crafting clean, performant, and visually expressive digital experiences. Though early in my professional journey, I've built a diverse range of real-world apps that reflect my obsession with quality and detail.",
+  bio: `I’m a Frontend Developer with a strong focus on building modern, scalable, and user-focused web applications using React, Next.js, and TypeScript.
+
+What sets me apart is my ability to work independently and solve complex problems under constraints. During my military service, I built multiple full-stack applications completely offline, relying only on my knowledge and problem-solving skills to deliver real, usable systems.
+
+I enjoy turning ideas into production-ready products, whether it’s a voice-first AI platform like Bookified or a full management system like Edu Nexus. I care deeply about clean architecture, performance, and creating smooth user experiences.
+
+I’m constantly learning and exploring new technologies, especially in AI integrations and modern web architecture, aiming to build tools that are not just functional but impactful.`,
   journeyTitle: "MY JOURNEY",
   stats: [
     { value: "50+", label: "Projects Built" },

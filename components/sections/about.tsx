@@ -59,7 +59,7 @@ export function AboutSection() {
           </motion.h2>
 
           <motion.p
-            className="mt-6 max-w-120 text-[15px] leading-[1.8] text-text-muted"
+            className="mt-6 max-w-140 whitespace-pre-line text-justify text-[15px] leading-[1.8] text-text-muted"
             variants={reveal}
             initial="hidden"
             whileInView="show"
