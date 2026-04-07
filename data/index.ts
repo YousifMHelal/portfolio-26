@@ -263,7 +263,7 @@ export const contactData: ContactData = {
   github: "https://github.com/YousifMHelal",
   githubUsername: "@YousifMHelal",
   linkedin: "https://www.linkedin.com/in/yousifmhelal/",
-  linkedinName: "Yousif Mamdouh",
+  linkedinName: "@YousifMHelal",
   whatsapp: "https://wa.me/+201150509675",
   facebook: "https://www.facebook.com/YousifM.Helal",
   cvPath: "/assets/Yousif%20Mamdouh.pdf",

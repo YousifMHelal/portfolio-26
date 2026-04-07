@@ -19,10 +19,10 @@ const socialLinks = [
     url: "https://www.linkedin.com/in/yousifmhelal/",
     color: "#0077b5",
   },
-  { label: "WhatsApp", url: "https://wa.me/+20XXXXXXXXXX", color: "#25D366" },
+  { label: "WhatsApp", url: "https://wa.me/+201150509675", color: "#25D366" },
   {
     label: "Facebook",
-    url: "https://www.facebook.com/YOUR_PROFILE",
+    url: "https://www.facebook.com/YousifM.Helal",
     color: "#1877F2",
   },
 ];

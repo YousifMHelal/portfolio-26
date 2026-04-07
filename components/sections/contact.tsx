@@ -415,7 +415,7 @@ export function Contact() {
                 fontWeight: 700,
                 marginTop: "12px",
               }}>
-              Yousif Mamdouh
+              @YousifM.Helal
             </p>
             <p
               style={{
