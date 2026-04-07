@@ -4,6 +4,18 @@
 
 ---
 
+## 📸 Screenshots / Demo
+
+![App Demo](./public/assets/screenshot-demo.png)
+
+[Desktop View](./public/assets/screenshot-disktop.png)
+
+[Mobile View](./public/assets/screenshot-mobile.png)
+
+[Live Demo](https://portfolio-26-42v77jt17-yousif-mamdouhs-projects.vercel.app/)
+
+---
+
 ## 📖 Description
 
 A modern, animation-rich personal portfolio built with Next.js App Router and TypeScript.
@@ -55,7 +67,7 @@ The UI is designed around:
 ### 1) Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone: https://github.com/YousifMHelal/portfolio-26.git
 cd portfolio-26
 ```
 
@@ -180,24 +192,11 @@ No environment variables are currently required.
 
 Verified from code scan:
 
-- No process.env usage detected
-- No NEXT_PUBLIC_* variables detected
+- No process.env usage
 
 Assumption:
 
 - Future integrations (analytics, APIs, form services) may introduce environment variables.
-
----
-
-## 📸 Screenshots / Demo
-
-
-![Mobile View](./public/assets/screenshot-mobile.png)
-Caption: Mobile responsive layout
-
-Optional demo placeholder:
-
-![Portfolio Demo](./public/assets/demo.gif)
 
 ---
 

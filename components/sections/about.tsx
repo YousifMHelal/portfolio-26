@@ -68,11 +68,11 @@ export function AboutSection() {
             {about.bio}
           </motion.p>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {about.stats.map((stat, index) => (
               <motion.article
                 key={stat.label}
-                className="rounded-xl border border-border bg-surface p-5 transition duration-300 hover:border-accent"
+                className="min-w-0 rounded-xl border border-border bg-surface p-5 transition duration-300 hover:border-accent"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -81,10 +81,10 @@ export function AboutSection() {
                   delay: index * 0.1,
                   ease: "easeOut",
                 }}>
-                <p className="text-[28px] font-black text-accent">
+                <p className="text-[clamp(18px,3vw,28px)] font-black leading-none break-words text-accent">
                   {stat.value}
                 </p>
-                <p className="mt-2 text-[12px] uppercase tracking-[2px] text-text-muted">
+                <p className="mt-2 max-w-full text-[12px] leading-snug uppercase tracking-[2px] text-text-muted">
                   {stat.label}
                 </p>
               </motion.article>

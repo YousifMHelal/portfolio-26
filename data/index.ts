@@ -222,8 +222,6 @@ export const skillSlugs = [
   "stripe",
 
   // State Management
-  "zustand",
-
   // Cloud & Deployment
   "vercel",
   "docker",
@@ -231,7 +229,6 @@ export const skillSlugs = [
   // Tools & Dev
   "git",
   "github",
-  "visualstudiocode",
   "figma",
   "vite",
   "prettier",

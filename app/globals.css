@@ -256,6 +256,10 @@
 }
 
 @media (min-width: 767px) and (max-width: 1023px) {
+  .floating-hero-image {
+    transform: none !important;
+  }
+
   .hero-right-column {
     min-height: 62svh !important;
     height: 62svh !important;
@@ -266,6 +270,17 @@
   #about-image-slot {
     height: 62svh !important;
     min-height: 480px;
+  }
+
+  .floating-hero-image img {
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  #about-image-slot img,
+  .about-image-fallback img {
+    object-fit: contain !important;
+    object-position: center top !important;
   }
 
   .hero-left-column {

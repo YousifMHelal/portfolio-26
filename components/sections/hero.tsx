@@ -161,7 +161,7 @@ export function HeroSection() {
 
           <motion.div
             id="hero-image"
-            className="hero-right-column relative min-h-[42vh] flex-1 overflow-hidden md:min-h-screen md:w-[45%] md:[clip-path:polygon(25%_0%,100%_0%,75%_100%,0%_100%)]">
+            className="hero-right-column relative min-h-[42vh] flex-1 overflow-hidden md:min-h-screen md:w-[45%] lg:[clip-path:polygon(25%_0%,100%_0%,75%_100%,0%_100%)]">
             <div
               id="hero-image-slot"
               className="relative h-full w-full overflow-hidden">
@@ -171,7 +171,8 @@ export function HeroSection() {
                   alt="Yousif Mamdouh"
                   fill
                   priority
-                  style={{ objectFit: "cover", objectPosition: "center top" }}
+                  sizes="(min-width: 1280px) 45vw, (min-width: 768px) 45vw, 100vw"
+                  className="object-cover object-top md:object-contain xl:object-cover"
                 />
               </div>
             </div>

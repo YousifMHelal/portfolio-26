@@ -39,6 +39,7 @@ const pacifico = Pacifico({
 export default function Home() {
   const floatingImageRef = useRef<HTMLDivElement | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [typedWelcome, setTypedWelcome] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -91,16 +92,22 @@ export default function Home() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 767px)");
+    const tabletQuery = window.matchMedia(
+      "(min-width: 767px) and (max-width: 1023px)",
+    );
 
     const handleChange = () => {
       setIsDesktop(mediaQuery.matches);
+      setIsTablet(tabletQuery.matches);
     };
 
     handleChange();
     mediaQuery.addEventListener("change", handleChange);
+    tabletQuery.addEventListener("change", handleChange);
 
     return () => {
       mediaQuery.removeEventListener("change", handleChange);
+      tabletQuery.removeEventListener("change", handleChange);
     };
   }, []);
 
@@ -135,22 +142,37 @@ export default function Home() {
       const heroSlot = document.getElementById("hero-image-slot");
       const aboutSlot = document.getElementById("about-image-slot");
       const floatingEl = floatingImageRef.current;
+      const startScale = isTablet ? 0.82 : 1.05;
+      const endScale = isTablet ? 0.78 : 1;
 
       if (!heroSlot || !aboutSlot || !floatingEl) {
         return;
       }
 
+      const getScaledBounds = (element: HTMLElement, scale: number) => {
+        const rect = element.getBoundingClientRect();
+        const width = rect.width * scale;
+        const height = rect.height * scale;
+
+        return {
+          top: rect.top + (rect.height - height) / 2,
+          left: rect.left + (rect.width - width) / 2,
+          width,
+          height,
+        };
+      };
+
       const setToHeroSlot = () => {
-        const heroRect = heroSlot.getBoundingClientRect();
+        const heroBounds = getScaledBounds(heroSlot, startScale);
 
         gsap.set(floatingEl, {
           position: "fixed",
-          top: heroRect.top,
-          left: heroRect.left,
-          width: heroRect.width,
-          height: heroRect.height,
+          top: heroBounds.top,
+          left: heroBounds.left,
+          width: heroBounds.width,
+          height: heroBounds.height,
           zIndex: 50,
-          scale: 1.05,
+          scale: 1,
           transformOrigin: "center top",
           willChange: "transform, top, left, width, height",
         });
@@ -171,31 +193,31 @@ export default function Home() {
           },
           onUpdate: (self) => {
             const progress = self.progress;
-            const heroRect = heroSlot.getBoundingClientRect();
-            const aboutRect = aboutSlot.getBoundingClientRect();
+            const heroBounds = getScaledBounds(heroSlot, startScale);
+            const aboutBounds = getScaledBounds(aboutSlot, endScale);
 
             gsap.set(floatingEl, {
               top: gsap.utils.interpolate(
-                heroRect.top,
-                aboutRect.top,
+                heroBounds.top,
+                aboutBounds.top,
                 progress,
               ),
               left: gsap.utils.interpolate(
-                heroRect.left,
-                aboutRect.left,
+                heroBounds.left,
+                aboutBounds.left,
                 progress,
               ),
               width: gsap.utils.interpolate(
-                heroRect.width,
-                aboutRect.width,
+                heroBounds.width,
+                aboutBounds.width,
                 progress,
               ),
               height: gsap.utils.interpolate(
-                heroRect.height,
-                aboutRect.height,
+                heroBounds.height,
+                aboutBounds.height,
                 progress,
               ),
-              scale: gsap.utils.interpolate(1.05, 1, progress),
+              scale: 1,
             });
           },
         },
@@ -206,28 +228,28 @@ export default function Home() {
         start: "top top",
         invalidateOnRefresh: true,
         onEnter: () => {
-          const aboutRect = aboutSlot.getBoundingClientRect();
+          const aboutBounds = getScaledBounds(aboutSlot, endScale);
 
           gsap.set(floatingEl, {
             position: "fixed",
-            top: aboutRect.top,
-            left: aboutRect.left,
-            width: aboutRect.width,
-            height: aboutRect.height,
+            top: aboutBounds.top,
+            left: aboutBounds.left,
+            width: aboutBounds.width,
+            height: aboutBounds.height,
             scale: 1,
             opacity: 1,
             display: "block",
           });
         },
         onEnterBack: () => {
-          const aboutRect = aboutSlot.getBoundingClientRect();
+          const aboutBounds = getScaledBounds(aboutSlot, endScale);
 
           gsap.set(floatingEl, {
             position: "fixed",
-            top: aboutRect.top,
-            left: aboutRect.left,
-            width: aboutRect.width,
-            height: aboutRect.height,
+            top: aboutBounds.top,
+            left: aboutBounds.left,
+            width: aboutBounds.width,
+            height: aboutBounds.height,
             scale: 1,
             opacity: 1,
             display: "block",
@@ -326,7 +348,7 @@ export default function Home() {
   }, [isDesktop, isLoading]);
 
   return (
-    <main className="min-h-screen bg-bg text-white">
+    <main className="min-h-screen bg-bg pb-24 text-white md:pb-0">
       {isLoading ? (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black"
@@ -371,7 +393,7 @@ export default function Home() {
               priority
               sizes="(max-width: 768px) 100vw, 45vw"
               style={{
-                objectFit: "cover",
+                objectFit: isTablet ? "contain" : "cover",
                 objectPosition: "center top",
                 background: "transparent",
               }}
