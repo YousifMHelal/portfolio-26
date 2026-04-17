@@ -178,22 +178,26 @@ export const projects: Project[] = [
   },
   {
     id: 6,
-    title: "Postpeak",
-    description:
-      "Blogging platform with user authentication, post creation, comments, category filtering, and Firebase backend.",
+    title: "Teba",
+    description: "Production-ready e-commerce platform with full shopping experience — product catalog, cart, checkout, admin dashboard, order management, and real-time Algolia search. Supports Arabic RTL UI and multiple Egyptian payment methods.",
     techStack: [
-      "Next.js 13",
-      "JavaScript",
+      "Next.js 14",
+      "TypeScript",
+      "PostgreSQL",
       "Prisma",
-      "Firebase Auth",
-      "NextAuth",
-      "React Quill",
+      "NextAuth.js",
+      "Algolia",
+      "Cloudinary",
+      "Zustand",
+      "Tailwind CSS",
+      "Recharts",
+      "Vercel",
     ],
-    githubUrl: "https://github.com/YousifMHelal/postpeak",
-    liveUrl: null,
-    size: "large",
-    image: "/assets/projects/postpeak.png",
-  },
+    githubUrl: "https://github.com/YousifMHelal/teba",
+    liveUrl: 'https://teba-ecommerce-theta.vercel.app/',
+    size: "medium",
+    image: "/assets/projects/teba.png",
+  }
 ];
 
 export const skillSlugs = [
