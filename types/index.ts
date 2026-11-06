@@ -11,10 +11,16 @@ export interface Project {
   title: string;
   description: string;
   techStack: string[];
-  githubUrl: string;
+  /** null for private/client work that has no public repository. */
+  githubUrl: string | null;
   liveUrl: string | null;
   size: "large" | "medium";
-  image: string;
+  /** null renders a branded cover instead of a screenshot. */
+  image: string | null;
+  /** CSS object-position for the screenshot. Defaults to "center top". */
+  imagePosition?: string;
+  /** Short label shown above the title, e.g. "ElectroPi · Client Work". */
+  label?: string;
 }
 
 export interface SkillItem {

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 
+import { SectionHeading } from "@/components/ui/section-heading";
 import { testimonials } from "@/data";
 import type { Testimonial } from "@/types";
 
@@ -15,7 +16,7 @@ function FeaturedCard({ testimonial }: TestimonialCardProps) {
       initial={{ opacity: 0, x: -40 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       whileHover={{ borderColor: "var(--color-accent)" }}
       style={{
         background: "var(--color-surface)",
@@ -117,7 +118,7 @@ function SideCard({ testimonial, index }: SideCardProps) {
       initial={{ opacity: 0, x: 40 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       whileHover={{ borderColor: "var(--color-accent)" }}
       style={{
         background: "var(--color-surface)",
@@ -154,7 +155,8 @@ function SideCard({ testimonial, index }: SideCardProps) {
       <p
         style={{
           fontSize: "14px",
-          color: "var(--color-text-muted)",
+          color: "var(--color-text)",
+          opacity: 0.78,
           lineHeight: 1.7,
           fontStyle: "italic",
           position: "relative",
@@ -204,34 +206,12 @@ export function Testimonials() {
         width: "100%",
         boxSizing: "border-box",
       }}>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        style={{ marginBottom: "48px" }}>
-        <span className="font-mono text-border-light">&lt;</span>
-        <span className="font-mono text-accent">{"TESTIMONIALS"}</span>
-        <span className="font-mono text-border-light"> /&gt;</span>
-        <h2
-          style={{
-            fontSize: "clamp(36px, 6vw, 80px)",
-            fontWeight: 900,
-            color: "white",
-            textTransform: "uppercase",
-          }}>
-          WHAT PEOPLE SAY
-        </h2>
-        <p
-          style={{
-            color: "var(--color-text-muted)",
-            fontSize: "15px",
-            marginTop: "12px",
-            maxWidth: "480px",
-          }}>
-          Kind words from people I&apos;ve had the pleasure of working with.
-        </p>
-      </motion.div>
+      <SectionHeading
+        tag="TESTIMONIALS"
+        title="What people say"
+        description="Kind words from people I've had the pleasure of working with."
+        className="mb-12"
+      />
 
       <div
         className="testimonials-grid"

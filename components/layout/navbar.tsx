@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   BriefcaseBusiness,
   Code2,
@@ -88,12 +89,22 @@ export function Navbar() {
                 key={id}
                 type="button"
                 onClick={() => scrollToSection(id)}
+                aria-current={active ? "true" : undefined}
                 className={
                   active
-                    ? "cursor-pointer rounded-full border border-border bg-surface px-4 py-2 text-[11px] font-semibold uppercase tracking-[2px] text-text transition-all duration-300 md:px-6 md:text-[13px]"
-                    : "cursor-pointer rounded-full border border-transparent px-3 py-2 text-[11px] font-medium uppercase tracking-[2px] text-text-muted transition-all duration-300 hover:text-accent md:px-4 md:text-[13px]"
+                    ? "relative cursor-pointer rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[2px] text-text transition-colors duration-300 md:px-5 md:text-[13px]"
+                    : "relative cursor-pointer rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[2px] text-text-muted transition-colors duration-300 hover:text-accent md:px-5 md:text-[13px]"
                 }>
-                {label}
+                {active ? (
+                  // Shared layoutId: framer slides this pill between items.
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-full border border-border bg-surface"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
+                ) : null}
+                <span className="relative z-10">{label}</span>
               </button>
             );
           })}
@@ -113,13 +124,22 @@ export function Navbar() {
                 type="button"
                 onClick={() => scrollToSection(id)}
                 aria-label={`Go to ${label}`}
+                aria-current={active ? "true" : undefined}
                 className={
                   active
-                    ? "flex flex-1 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-accent transition-all duration-300"
-                    : "flex flex-1 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-text-muted transition-all duration-300 hover:text-accent"
+                    ? "relative flex flex-1 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-accent transition-colors duration-300"
+                    : "relative flex flex-1 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-text-muted transition-colors duration-300 hover:text-accent"
                 }>
-                <Icon size={18} strokeWidth={2.2} />
-                <span className="text-[10px] font-medium tracking-wide">
+                {active ? (
+                  <motion.span
+                    layoutId="mobile-nav-active-pill"
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-xl bg-white/6"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
+                ) : null}
+                <Icon size={18} strokeWidth={2.2} className="relative z-10" />
+                <span className="relative z-10 text-[10px] font-medium tracking-wide">
                   {label}
                 </span>
               </button>

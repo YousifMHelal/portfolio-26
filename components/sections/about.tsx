@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { CountUp } from "@/components/ui/count-up";
 import { about, hero, timeline } from "@/data";
 
 const reveal = {
@@ -39,7 +40,7 @@ export function AboutSection() {
             variants={reveal}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.55, ease: "easeOut" }}>
             <span className="font-mono text-border-light">&lt;</span>
             <span className="font-mono text-accent">
@@ -53,7 +54,7 @@ export function AboutSection() {
             variants={reveal}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}>
             {about.heading}
           </motion.h2>
@@ -63,7 +64,7 @@ export function AboutSection() {
             variants={reveal}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}>
             {about.bio}
           </motion.p>
@@ -75,14 +76,14 @@ export function AboutSection() {
                 className="min-w-0 rounded-xl border border-border bg-surface p-5 transition duration-300 hover:border-accent"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: false, margin: "-100px" }}
                 transition={{
                   duration: 0.5,
                   delay: index * 0.1,
                   ease: "easeOut",
                 }}>
                 <p className="text-[clamp(18px,3vw,28px)] font-black leading-none break-words text-accent">
-                  {stat.value}
+                  <CountUp value={stat.value} />
                 </p>
                 <p className="mt-2 max-w-full text-[12px] leading-snug uppercase tracking-[2px] text-text-muted">
                   {stat.label}
@@ -96,7 +97,7 @@ export function AboutSection() {
               className="mb-8 ml-4 inline-flex items-center gap-1 text-[15px] font-medium tracking-[2px]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}>
               <span className="font-mono text-border-light">&lt;</span>
               <span className="font-mono text-accent">
@@ -112,7 +113,7 @@ export function AboutSection() {
                   className="relative mb-10 last:mb-0"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: false, margin: "-100px" }}
                   transition={{
                     duration: 0.55,
                     delay: index * 0.1,
@@ -139,7 +140,7 @@ export function AboutSection() {
               className="mt-8 ml-4 inline-flex items-center gap-1 text-[15px] font-medium tracking-[2px]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}>
               <span className="font-mono text-border-light">&lt;/</span>
               <span className="font-mono text-accent">
@@ -153,7 +154,7 @@ export function AboutSection() {
             className="mt-10 inline-flex items-center gap-1 text-[15px] font-medium tracking-[2px]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}>
             <span className="font-mono text-border-light">&lt;/</span>
             <span className="font-mono text-accent">
