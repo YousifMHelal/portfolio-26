@@ -206,7 +206,8 @@
   .bento-grid > * {
     grid-column: auto !important;
     grid-row: auto !important;
-    min-height: 300px !important;
+    /* Tall enough for the hover overlay (label, title, 4 lines, pills, buttons). */
+    min-height: 340px !important;
   }
 
   /* Odd card count: let the last card span both columns instead of leaving a gap. */
@@ -224,7 +225,7 @@
   .bento-grid > * {
     grid-column: 1 / -1 !important;
     grid-row: auto !important;
-    min-height: 260px !important;
+    min-height: 340px !important;
   }
 }
 
@@ -304,6 +305,12 @@
     object-fit: cover !important;
     object-position: center top !important;
     height: 380px !important;
+  }
+
+  /* Fade the cropped photo into the page instead of ending on a hard edge. */
+  .hero-image-fallback {
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
   }
 }
 

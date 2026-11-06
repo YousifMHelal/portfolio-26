@@ -24,6 +24,9 @@ const projectGradients: Record<string, string> = {
   "Cash Management": "linear-gradient(135deg, #1a1000, #332200)",
 };
 
+// Keeps the hover overlay inside short cards; the rest show as "+N".
+const MAX_OVERLAY_TECH = 6;
+
 const pillStyle = {
   fontSize: 10,
   background: "var(--color-surface-3)",
@@ -148,17 +151,19 @@ export default function ProjectCard({
       <AnimatePresence>
         {isHovered ? (
           <motion.div
-            className="absolute inset-0 flex items-center"
+            // Scrollable column + my-auto child: centred when it fits,
+            // top-aligned (never clipped) when the card is short.
+            className="absolute inset-0 flex flex-col overflow-y-auto"
             style={{
-              background: "rgba(0, 0, 0, 0.72)",
+              background: "rgba(0, 0, 0, 0.78)",
               backdropFilter: "blur(2px)",
-              padding: "24px 20px",
+              padding: "20px",
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}>
-            <div className="w-full">
+            <div className="my-auto w-full">
               <p
                 style={{
                   fontSize: 10,
@@ -180,21 +185,29 @@ export default function ProjectCard({
               </h3>
 
               <p
-                className="mt-2"
+                className="mt-2 line-clamp-4"
+                title={project.description}
                 style={{
                   fontSize: 13,
                   color: "var(--color-text-muted)",
-                  lineHeight: 1.7,
+                  lineHeight: 1.65,
                 }}>
                 {project.description}
               </p>
 
               <div className="mt-3 flex flex-wrap gap-2">
-                {project.techStack.map((tech) => (
+                {project.techStack.slice(0, MAX_OVERLAY_TECH).map((tech) => (
                   <span key={tech} style={pillStyle}>
                     {tech}
                   </span>
                 ))}
+                {project.techStack.length > MAX_OVERLAY_TECH ? (
+                  <span
+                    style={pillStyle}
+                    title={project.techStack.slice(MAX_OVERLAY_TECH).join(", ")}>
+                    +{project.techStack.length - MAX_OVERLAY_TECH}
+                  </span>
+                ) : null}
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
