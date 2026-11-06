@@ -47,7 +47,7 @@ export function Footer() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        viewport={{ once: true }}>
+        viewport={{ once: false }}>
         <div
           className="footer-grid"
           style={{
@@ -76,8 +76,8 @@ export function Footer() {
                 marginTop: "12px",
                 maxWidth: "240px",
               }}>
-              A passionate web developer crafting modern and interactive digital
-              experiences.
+              Full Stack Developer at ElectroPi, building AI-powered web
+              platforms end to end.
             </p>
 
             <div
@@ -106,7 +106,7 @@ export function Footer() {
                   color: "var(--color-accent)",
                   letterSpacing: "1px",
                 }}>
-                Available for work
+                Open to opportunities
               </span>
             </div>
           </div>
@@ -165,7 +165,7 @@ export function Footer() {
               style={{ display: "grid", gap: "12px" }}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               variants={{
                 hidden: {},
                 visible: {

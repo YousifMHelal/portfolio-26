@@ -9,8 +9,8 @@ import type {
 
 export const hero: HeroContent = {
   name: "Yousif Mamdouh",
-  role: "Web Developer",
-  bio: "Frontend Developer crafting modern, scalable web applications with React, Next.js, and TypeScript. I turn complex ideas into fast, intuitive, and production-ready products.",
+  role: "Full Stack Developer",
+  bio: "Full Stack Developer at ElectroPi, building AI-powered web platforms end to end with React, Next.js, Node.js, and TypeScript. I turn complex ideas into fast, intuitive, and production-ready products.",
   backgroundText: "YOUSIF MAMDOUH",
   signatureImage: "/assets/signature.png",
   portraitImage: "/assets/hero-reference.png",
@@ -34,22 +34,29 @@ export const hero: HeroContent = {
 export const about: AboutData = {
   label: "ABOUT ME",
   heading: "Who is Yousif?",
-  bio: `I’m a Frontend Developer with a strong focus on building modern, scalable, and user-focused web applications using React, Next.js, and TypeScript.
+  bio: `I’m a Full Stack Developer at ElectroPi, an enterprise AI engineering company, where I build the web platforms that put AI products in front of real users, from React and Next.js frontends to Node.js and Express APIs on PostgreSQL.
 
-What sets me apart is my ability to work independently and solve complex problems under constraints. During my military service, I built multiple full-stack applications completely offline, relying only on my knowledge and problem-solving skills to deliver real, usable systems.
+Since June 2026 I’ve shipped production systems across healthcare, HR tech, real estate, and corporate training: a clinical decision-support dashboard for physicians, a bilingual AI sales CRM, a two-sided hiring marketplace, and an AI training portal that runs coaching sessions inside Microsoft Teams.
 
-I enjoy turning ideas into production-ready products, whether it’s a voice-first AI platform like Bookified or a full management system like Edu Nexus. I care deeply about clean architecture, performance, and creating smooth user experiences.
+Before that, during my military service, I built multiple full-stack applications completely offline, relying only on my knowledge and problem-solving skills. That taught me to work independently and deliver under real constraints.
 
-I’m constantly learning and exploring new technologies, especially in AI integrations and modern web architecture, aiming to build tools that are not just functional but impactful.`,
+I care deeply about clean architecture, type safety, testing, and smooth user experiences, and I’m always exploring new ways to integrate AI into products that are not just functional but impactful.`,
   journeyTitle: "MY JOURNEY",
   stats: [
     { value: "50+", label: "Projects Built" },
-    { value: "1-2", label: "Years Experience" },
-    { value: "Frontend", label: "Specialist" },
+    { value: "2+", label: "Years Experience" },
+    { value: "Full Stack", label: "Developer" },
   ],
 };
 
 export const timeline: TimelineItem[] = [
+  {
+    year: "06/2026 - Present",
+    title: "Full Stack Developer",
+    subtitle: "ElectroPi",
+    description:
+      "Building AI-powered enterprise platforms end to end: MODRB (AI training portal in Microsoft Teams), Medswarm (clinical decision-support dashboard + Express API), Land & Lead (bilingual real-estate AI sales CRM), and Alcamp (hiring marketplace). Next.js, React, Node.js, Prisma, PostgreSQL, with full Arabic/English RTL support, automated tests, and CI/CD.",
+  },
   {
     year: "2025 - 2027",
     title: "Postgraduate Diploma in Computer Science",
@@ -80,9 +87,123 @@ export const timeline: TimelineItem[] = [
   },
 ];
 
+const ELECTROPI_LABEL = "ElectroPi · Client Work";
+
 export const projects: Project[] = [
   {
     id: 1,
+    title: "MODRB",
+    label: ELECTROPI_LABEL,
+    description:
+      "Enterprise AI training platform where an AI trainer runs live coaching sessions inside Microsoft Teams and grades each one against learning outcomes. Built the portal (training-plan and track wizards, scheduling, reports, admin) and its Express API with Microsoft Entra sign-in.",
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Zustand",
+      "Zod",
+      "Express 5",
+      "Prisma",
+      "PostgreSQL",
+      "Azure MSAL",
+      "pg-boss",
+      "Playwright",
+    ],
+    githubUrl: null,
+    liveUrl: null,
+    size: "large",
+    image: "/assets/projects/modrb.png",
+  },
+  {
+    id: 2,
+    title: "Medswarm",
+    label: ELECTROPI_LABEL,
+    description:
+      "Clinical decision-support dashboard over a hospital HIS: physicians review AI-generated suggestions and approve or reject each one. Built the React dashboard, the Express REST API (auth, audit, contract mapping to the AI service), and a mock HIS for integration testing.",
+    techStack: [
+      "React 19",
+      "Vite",
+      "TypeScript",
+      "TanStack Query",
+      "Zustand",
+      "Express 5",
+      "Prisma",
+      "PostgreSQL",
+      "LiveKit",
+      "Vitest",
+    ],
+    githubUrl: null,
+    liveUrl: "https://demo.testdevelopment.top:5100/",
+    size: "medium",
+    image: "/assets/projects/medswarm.png",
+    imagePosition: "left top",
+  },
+  {
+    id: 3,
+    title: "Alcamp",
+    label: ELECTROPI_LABEL,
+    description:
+      "Two-sided hiring marketplace connecting companies with project-trained talent. Candidate, company, and admin areas with JWT auth per role, applicant pipeline, interview and offer lifecycle, assessments, and real-time SignalR notifications.",
+    techStack: [
+      "React 19",
+      "Vite",
+      "TypeScript",
+      "TanStack Query",
+      "React Router",
+      "SignalR",
+      "TipTap",
+      "Tailwind CSS",
+    ],
+    githubUrl: null,
+    liveUrl: null,
+    size: "medium",
+    image: "/assets/projects/alcamp.png",
+  },
+  {
+    id: 4,
+    title: "Land & Lead",
+    label: ELECTROPI_LABEL,
+    description:
+      "Bilingual (AR/EN, full RTL) CRM for an AI sales agent that qualifies Saudi real-estate leads over WhatsApp: lead pipeline, conversation viewer, property knowledge base, billing, and analytics, fed by an HMAC-signed webhook.",
+    techStack: [
+      "Next.js 15",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "NextAuth",
+      "next-intl",
+      "TanStack Table",
+      "Recharts",
+      "LiveKit",
+    ],
+    githubUrl: null,
+    liveUrl: "https://demo.testdevelopment.top:6101/en",
+    size: "medium",
+    image: "/assets/projects/land-and-lead.png",
+  },
+  {
+    id: 5,
+    title: "Retail ERP",
+    description:
+      "Arabic-first (RTL) retail shop ERP: sales and purchase invoices, inventory with low-stock alerts and stock-taking, customer and supplier ledgers, financial reports, and printable PDF statements.",
+    techStack: [
+      "Next.js 15",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "NextAuth",
+      "Zustand",
+      "React PDF",
+      "Playwright",
+    ],
+    githubUrl: "https://github.com/YousifMHelal/Erp",
+    liveUrl: "https://erp-amber-nu.vercel.app",
+    size: "medium",
+    image: "/assets/projects/erp.png",
+    imagePosition: "right center",
+  },
+  {
+    id: 6,
     title: "Bookified",
     description:
       "AI-powered voice companion platform that transforms PDFs into interactive conversational experiences with real-time voice AI.",
@@ -98,88 +219,14 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/YousifMHelal/bookified",
     liveUrl: "https://bookified-bay.vercel.app/",
-    size: "large",
+    size: "medium",
     image: "/assets/projects/bookified.png",
   },
   {
-    id: 2,
-    title: "Edu Nexus",
-    description:
-      "Comprehensive school management dashboard with role-based access for admins, teachers, students, and parents.",
-    techStack: [
-      "Next.js 14",
-      "TypeScript",
-      "Prisma",
-      "PostgreSQL",
-      "Clerk Auth",
-      "Shadcn UI",
-      "Tailwind CSS",
-    ],
-    githubUrl: "https://github.com/YousifMHelal/edu-nexus",
-    liveUrl: null,
-    size: "medium",
-    image: "/assets/projects/edu-nexus.png",
-  },
-  {
-    id: 3,
-    title: "Trendy",
-    description:
-      "Full-featured e-commerce platform with product management, Stripe payments, order processing, and email notifications.",
-    techStack: [
-      "Next.js 14",
-      "TypeScript",
-      "MongoDB",
-      "Stripe",
-      "Firebase",
-      "Zustand",
-      "Tailwind CSS",
-    ],
-    githubUrl: "https://github.com/YousifMHelal/trendy",
-    liveUrl: null,
-    size: "medium",
-    image: "/assets/projects/trendy.png",
-  },
-  {
-    id: 4,
-    title: "Cash Withdraw",
-    description:
-      "Full-stack financial operations dashboard with Arabic-first RTL UI for daily treasury tracking and WhatsApp-optimized PDF reporting.",
-    techStack: [
-      "React 19",
-      "Node.js",
-      "Express",
-      "Prisma",
-      "SQLite",
-      "Tailwind CSS",
-      "jsPDF",
-    ],
-    githubUrl: "https://github.com/YousifMHelal/cash-withdraw",
-    liveUrl: null,
-    size: "medium",
-    image: "/assets/projects/cash-withdraw.png",
-  },
-  {
-    id: 5,
-    title: "Momento",
-    description:
-      "Dynamic social media platform featuring post creation, likes, saves, user profiles, trending feed, and drag-and-drop file uploads.",
-    techStack: [
-      "React 18",
-      "TypeScript",
-      "Appwrite",
-      "React Query",
-      "Shadcn UI",
-      "Tailwind CSS",
-    ],
-    githubUrl: "https://github.com/YousifMHelal/momento",
-    liveUrl: null,
-    size: "medium",
-    image: "/assets/projects/momento.png",
-  },
-  {
-    id: 6,
+    id: 7,
     title: "Teba",
-    description: "Production-ready e-commerce platform with full shopping experience — product catalog, cart, checkout, admin dashboard, order management, and real-time Algolia search. Supports Arabic RTL UI and multiple Egyptian payment methods.",
+    description:
+      "Production-ready e-commerce platform with full shopping experience — product catalog, cart, checkout, admin dashboard, order management, and real-time Algolia search. Supports Arabic RTL UI and multiple Egyptian payment methods.",
     techStack: [
       "Next.js 14",
       "TypeScript",
@@ -193,11 +240,34 @@ export const projects: Project[] = [
       "Recharts",
       "Vercel",
     ],
-    githubUrl: "https://github.com/YousifMHelal/teba",
-    liveUrl: 'https://teba-ecommerce-theta.vercel.app/',
+    githubUrl: "https://github.com/YousifMHelal/teba-ecommerce",
+    liveUrl: "https://teba-ecommerce.vercel.app",
     size: "medium",
     image: "/assets/projects/teba.png",
-  }
+  },
+  {
+    id: 8,
+    title: "Cash Management",
+    label: "Freelance · Client Work",
+    description:
+      "Arabic-first (RTL) installable PWA for a cash-desk business: daily opening balances across Cash, Vodafone Cash, InstaPay, and Fawry, guarded withdrawals, deposits, transfers, and expenses, shift handover, customer debt ledgers, and branded PDF reports shared to WhatsApp.",
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Prisma 7",
+      "PostgreSQL",
+      "NextAuth",
+      "React PDF",
+      "PWA",
+      "Vitest",
+      "Playwright",
+    ],
+    githubUrl: null,
+    liveUrl: null,
+    size: "medium",
+    image: "/assets/projects/cash-withdraw.png",
+  },
 ];
 
 export const skillSlugs = [
@@ -208,30 +278,46 @@ export const skillSlugs = [
   // Frontend
   "react",
   "nextdotjs",
+  "vite",
   "html5",
   "css3",
-  "bootstrap",
   "tailwindcss",
+  "shadcnui",
+  "radixui",
+  "bootstrap",
   "reactrouter",
+  "reactquery",
+  "reacthookform",
 
   // Backend
   "nodedotjs",
   "express",
+  "swagger",
 
   // Databases
+  "postgresql",
+  "prisma",
   "mongodb",
   "mysql",
-  "prisma",
+  "sqlite",
   "firebase",
+
+  // Validation & Testing
+  "zod",
+  "vitest",
+
+  // AI & Realtime
+  "googlegemini",
+  "elevenlabs",
+
+  // Search, Auth & Payments
+  "algolia",
+  "clerk",
+  "stripe",
 
   // CMS & Other
   "wordpress",
 
-  // Auth & Payments
-  "clerk",
-  "stripe",
-
-  // State Management
   // Cloud & Deployment
   "vercel",
   "docker",
@@ -240,28 +326,27 @@ export const skillSlugs = [
   "git",
   "github",
   "figma",
-  "vite",
   "prettier",
 ]
 
 export const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Ahmed Abdelwahab",
+    name: "Abdelrahman Ali",
     quote:
       "Yousif is one of the most talented people I've worked with. He delivers work correctly and on time, and if there are any revisions he handles them without hesitation and at no extra cost - delivering exactly what was required.",
     featured: true,
   },
   {
     id: 2,
-    name: "Mohamed Ahmed",
+    name: "Mahmoud Saeed",
     quote:
       "One of the best people I've worked with. He built several apps that fully digitized our paper-based workflow - and all of that during his military service, without internet access.",
     featured: false,
   },
   {
     id: 3,
-    name: "Mahmoud Mohamed",
+    name: "Ibrahim Mohamed",
     quote:
       "I highly recommend working with him. One of the most skilled people I've worked with, delivering exceptional results in record time.",
     featured: false,

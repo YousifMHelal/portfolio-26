@@ -14,8 +14,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yousif Mamdouh | Portfolio",
-  description: "Dark mode portfolio landing page for Yousif Mamdouh.",
+  metadataBase: new URL("https://www.yousifmamdouh.tech"),
+  title: "Yousif Mamdouh | Full Stack Developer",
+  description:
+    "Yousif Mamdouh, Full Stack Developer at ElectroPi building AI-powered web platforms with React, Next.js, Node.js, TypeScript, and PostgreSQL.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Yousif Mamdouh",
+    title: "Yousif Mamdouh | Full Stack Developer",
+    description:
+      "Full Stack Developer at ElectroPi building AI-powered web platforms with React, Next.js, Node.js, and TypeScript.",
+    images: [{ url: "/assets/screenshot-demo.png", alt: "Yousif Mamdouh portfolio" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yousif Mamdouh | Full Stack Developer",
+    description:
+      "Full Stack Developer at ElectroPi building AI-powered web platforms with React, Next.js, Node.js, and TypeScript.",
+    images: ["/assets/screenshot-demo.png"],
+  },
 };
 
 export const viewport: Viewport = {

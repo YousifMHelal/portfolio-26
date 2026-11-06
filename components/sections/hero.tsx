@@ -32,24 +32,38 @@ export function HeroSection() {
   const nameRef = useRef<HTMLHeadingElement | null>(null);
   const watermarkRef = useRef<HTMLDivElement | null>(null);
 
+  // Name glitch: plays on load and again every time the hero re-enters view.
   useEffect(() => {
-    if (!nameRef.current) {
+    const name = nameRef.current;
+
+    if (!name) {
       return;
     }
 
-    const timeline = gsap.timeline();
+    const timeline = gsap
+      .timeline({ paused: true })
+      .to(name, { skewX: 10, duration: 0.08, ease: "power1.inOut" })
+      .to(name, { skewX: -6, duration: 0.06 })
+      .to(name, { skewX: 4, duration: 0.05 })
+      .to(name, { skewX: 0, duration: 0.07 })
+      .to(name, { opacity: 0.6, duration: 0.05 })
+      .to(name, { opacity: 1, duration: 0.05 })
+      .to(name, { skewX: -2, duration: 0.04 })
+      .to(name, { skewX: 0, duration: 0.06 });
 
-    timeline
-      .to(nameRef.current, { skewX: 10, duration: 0.08, ease: "power1.inOut" })
-      .to(nameRef.current, { skewX: -6, duration: 0.06 })
-      .to(nameRef.current, { skewX: 4, duration: 0.05 })
-      .to(nameRef.current, { skewX: 0, duration: 0.07 })
-      .to(nameRef.current, { opacity: 0.6, duration: 0.05 })
-      .to(nameRef.current, { opacity: 1, duration: 0.05 })
-      .to(nameRef.current, { skewX: -2, duration: 0.04 })
-      .to(nameRef.current, { skewX: 0, duration: 0.06 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          timeline.restart(true);
+        }
+      },
+      { threshold: 0.6 },
+    );
+
+    observer.observe(name);
 
     return () => {
+      observer.disconnect();
       timeline.kill();
     };
   }, []);
@@ -59,12 +73,16 @@ export function HeroSection() {
       return;
     }
 
-    gsap.to(watermarkRef.current, {
+    const marquee = gsap.to(watermarkRef.current, {
       x: "-50%",
       duration: 18,
       ease: "none",
       repeat: -1,
     });
+
+    return () => {
+      marquee.kill();
+    };
   }, []);
 
   return (
@@ -97,7 +115,8 @@ export function HeroSection() {
                 className="flex flex-1 items-center pb-10 pt-12 md:pb-14 md:pt-8"
                 variants={containerVariants}
                 initial="hidden"
-                animate="visible">
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}>
                 <div className="relative max-w-2xl">
                   <motion.p
                     className="max-w-sm text-[0.9rem] font-medium uppercase tracking-[0.34em] text-white"

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+import { SectionHeading } from "@/components/ui/section-heading";
+import { SectionTag } from "@/components/ui/section-tag";
 import { contactData } from "@/data";
 
 const cardStyle: React.CSSProperties = {
@@ -83,54 +85,19 @@ export function Contact() {
         width: "100%",
         boxSizing: "border-box",
       }}>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        viewport={{ once: true }}
-        style={{ marginBottom: "48px" }}>
-        <div
-          style={{
-            marginBottom: "8px",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "4px",
-            fontSize: "15px",
-            fontWeight: 500,
-            letterSpacing: "2px",
-            fontFamily: "var(--font-mono)",
-          }}>
-          <span style={{ color: "var(--color-border-light)" }}>&lt;</span>
-          <span style={{ color: "var(--color-accent)" }}>CONTACT</span>
-          <span style={{ color: "var(--color-border-light)" }}>&gt;</span>
-        </div>
-        <h2
-          style={{
-            fontSize: "clamp(36px, 6vw, 80px)",
-            fontWeight: 900,
-            color: "white",
-            textTransform: "uppercase",
-          }}>
-          LET&apos;S WORK TOGETHER
-        </h2>
-        <p
-          style={{
-            color: "var(--color-text-muted)",
-            fontSize: "15px",
-            marginTop: "12px",
-            maxWidth: "480px",
-          }}>
-          Have a project in mind or just want to say hi? My inbox is always
-          open.
-        </p>
-      </motion.div>
+      <SectionHeading
+        tag="CONTACT"
+        title="Let's work together"
+        description="Have a project in mind or just want to say hi? My inbox is always open."
+        className="mb-12"
+      />
 
       <motion.div
         className="contact-grid"
         variants={gridVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.15 }}
+        viewport={{ once: false, amount: 0.15 }}
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(12, 1fr)",
@@ -548,21 +515,10 @@ export function Contact() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        style={{
-          marginTop: "40px",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "4px",
-          fontSize: "15px",
-          fontWeight: 500,
-          letterSpacing: "2px",
-          fontFamily: "var(--font-mono)",
-        }}>
-        <span style={{ color: "var(--color-border-light)" }}>&lt;/</span>
-        <span style={{ color: "var(--color-accent)" }}>CONTACT</span>
-        <span style={{ color: "var(--color-border-light)" }}>&gt;</span>
+        style={{ marginTop: "40px" }}>
+        <SectionTag name="CONTACT" closing />
       </motion.div>
     </section>
   );

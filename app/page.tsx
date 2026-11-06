@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { MotionConfig } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -10,6 +11,7 @@ import { Pacifico } from "next/font/google";
 import DotNav from "@/components/layout/DotNav";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { ScrollProgress } from "@/components/layout/scroll-progress";
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
 import { ProjectsSection } from "@/components/sections/projects";
@@ -35,6 +37,36 @@ const pacifico = Pacifico({
   subsets: ["latin"],
   weight: "400",
 });
+
+type Bounds = { top: number; left: number; width: number; height: number };
+
+/**
+ * Bounds of `element` shrunk/grown around its centre by `scale`, expressed in
+ * viewport coordinates *at the moment the page is scrolled to `scrollY`*.
+ * Measuring in document space keeps the result correct no matter where the
+ * page is scrolled when ScrollTrigger refreshes.
+ */
+function boundsAtScroll(
+  element: HTMLElement,
+  docTop: number,
+  scrollY: number,
+  scale: number,
+): Bounds {
+  const rect = element.getBoundingClientRect();
+  const width = rect.width * scale;
+  const height = element.offsetHeight * scale;
+
+  return {
+    top: docTop - scrollY + (element.offsetHeight - height) / 2,
+    left: rect.left + (rect.width - width) / 2,
+    width,
+    height,
+  };
+}
+
+function docTopOf(element: HTMLElement) {
+  return element.getBoundingClientRect().top + window.scrollY;
+}
 
 export default function Home() {
   const floatingImageRef = useRef<HTMLDivElement | null>(null);
@@ -112,21 +144,122 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!floatingImageRef.current) {
-      return;
-    }
+    const floatingEl = floatingImageRef.current;
 
-    if (isLoading) {
+    if (!floatingEl || isLoading) {
       return;
     }
 
     if (!isDesktop) {
-      gsap.set(floatingImageRef.current, { display: "none" });
+      gsap.set(floatingEl, { display: "none" });
       ScrollTrigger.killAll();
       return;
     }
 
-    gsap.set(floatingImageRef.current, { display: "block", opacity: 1 });
+    const heroSection = document.getElementById("hero");
+    const heroSlot = document.getElementById("hero-image-slot");
+    const aboutReceiver = document.getElementById("about-image-receiver");
+    const aboutSlot = document.getElementById("about-image-slot");
+
+    if (!heroSection || !heroSlot || !aboutReceiver || !aboutSlot) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const startScale = isTablet ? 0.82 : 1.05;
+    const endScale = isTablet ? 0.78 : 1;
+
+    // Start: hero slot when the hero's top sits at the top of the viewport.
+    // End:   about slot when the hero's bottom sits at the top of the viewport.
+    // Both are cached here and only re-measured on refresh, never per frame.
+    let from: Bounds = { top: 0, left: 0, width: 0, height: 0 };
+    let to: Bounds = { top: 0, left: 0, width: 0, height: 0 };
+
+    const measure = () => {
+      const heroTop = docTopOf(heroSection);
+      const heroBottom = heroTop + heroSection.offsetHeight;
+
+      from = boundsAtScroll(heroSlot, docTopOf(heroSlot), heroTop, startScale);
+      // The about slot is sticky, so measure its non-sticky parent's position.
+      to = boundsAtScroll(
+        aboutSlot,
+        docTopOf(aboutReceiver),
+        heroBottom,
+        endScale,
+      );
+
+      gsap.set(floatingEl, { top: from.top, left: from.left });
+    };
+
+    const ctx = gsap.context(() => {
+      measure();
+
+      gsap.set(floatingEl, {
+        display: "block",
+        autoAlpha: 1,
+        position: "fixed",
+        zIndex: 50,
+        transformOrigin: "center top",
+        willChange: "transform, width, height",
+      });
+
+      // Position travels on the compositor (x/y); size eases with it.
+      // `scrub` as a number smooths the motion behind the scrollbar.
+      gsap.fromTo(
+        floatingEl,
+        {
+          x: 0,
+          y: 0,
+          width: () => from.width,
+          height: () => from.height,
+        },
+        {
+          x: () => to.left - from.left,
+          y: () => to.top - from.top,
+          width: () => to.width,
+          height: () => to.height,
+          ease: "power2.inOut",
+          immediateRender: true,
+          scrollTrigger: {
+            trigger: heroSection,
+            start: "top top",
+            end: "bottom top",
+            scrub: prefersReducedMotion ? true : 0.9,
+            invalidateOnRefresh: true,
+          },
+        },
+      );
+
+      // Hand off to the in-flow about image once the about section starts
+      // scrolling away. On desktop it sits exactly underneath, so the swap is
+      // instant and invisible; on tablet it is hidden, so fade instead.
+      const handOffDuration = isTablet ? 0.35 : 0;
+
+      ScrollTrigger.create({
+        trigger: "#projects",
+        start: "top bottom",
+        onEnter: () => {
+          gsap.to(floatingEl, {
+            autoAlpha: 0,
+            duration: handOffDuration,
+            ease: "power1.out",
+            overwrite: "auto",
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(floatingEl, {
+            autoAlpha: 1,
+            duration: handOffDuration,
+            ease: "power1.out",
+            overwrite: "auto",
+          });
+        },
+      });
+    });
+
+    ScrollTrigger.addEventListener("refreshInit", measure);
 
     const refreshTimeout = window.setTimeout(() => {
       ScrollTrigger.refresh();
@@ -138,216 +271,19 @@ export default function Home() {
 
     window.addEventListener("load", handleWindowLoad);
 
-    const ctx = gsap.context(() => {
-      const heroSlot = document.getElementById("hero-image-slot");
-      const aboutSlot = document.getElementById("about-image-slot");
-      const floatingEl = floatingImageRef.current;
-      const startScale = isTablet ? 0.82 : 1.05;
-      const endScale = isTablet ? 0.78 : 1;
-
-      if (!heroSlot || !aboutSlot || !floatingEl) {
-        return;
-      }
-
-      const getScaledBounds = (element: HTMLElement, scale: number) => {
-        const rect = element.getBoundingClientRect();
-        const width = rect.width * scale;
-        const height = rect.height * scale;
-
-        return {
-          top: rect.top + (rect.height - height) / 2,
-          left: rect.left + (rect.width - width) / 2,
-          width,
-          height,
-        };
-      };
-
-      const setToHeroSlot = () => {
-        const heroBounds = getScaledBounds(heroSlot, startScale);
-
-        gsap.set(floatingEl, {
-          position: "fixed",
-          top: heroBounds.top,
-          left: heroBounds.left,
-          width: heroBounds.width,
-          height: heroBounds.height,
-          zIndex: 50,
-          scale: 1,
-          transformOrigin: "center top",
-          willChange: "transform, top, left, width, height",
-        });
-      };
-
-      setToHeroSlot();
-
-      const travelTween = gsap.to(floatingEl, {
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.5,
-          invalidateOnRefresh: true,
-          onRefresh: () => {
-            setToHeroSlot();
-          },
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const heroBounds = getScaledBounds(heroSlot, startScale);
-            const aboutBounds = getScaledBounds(aboutSlot, endScale);
-
-            gsap.set(floatingEl, {
-              top: gsap.utils.interpolate(
-                heroBounds.top,
-                aboutBounds.top,
-                progress,
-              ),
-              left: gsap.utils.interpolate(
-                heroBounds.left,
-                aboutBounds.left,
-                progress,
-              ),
-              width: gsap.utils.interpolate(
-                heroBounds.width,
-                aboutBounds.width,
-                progress,
-              ),
-              height: gsap.utils.interpolate(
-                heroBounds.height,
-                aboutBounds.height,
-                progress,
-              ),
-              scale: 1,
-            });
-          },
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: "#about",
-        start: "top top",
-        invalidateOnRefresh: true,
-        onEnter: () => {
-          const aboutBounds = getScaledBounds(aboutSlot, endScale);
-
-          gsap.set(floatingEl, {
-            position: "fixed",
-            top: aboutBounds.top,
-            left: aboutBounds.left,
-            width: aboutBounds.width,
-            height: aboutBounds.height,
-            scale: 1,
-            opacity: 1,
-            display: "block",
-          });
-        },
-        onEnterBack: () => {
-          const aboutBounds = getScaledBounds(aboutSlot, endScale);
-
-          gsap.set(floatingEl, {
-            position: "fixed",
-            top: aboutBounds.top,
-            left: aboutBounds.left,
-            width: aboutBounds.width,
-            height: aboutBounds.height,
-            scale: 1,
-            opacity: 1,
-            display: "block",
-          });
-        },
-        onLeaveBack: () => {
-          const heroRect = document
-            .getElementById("hero-image-slot")
-            ?.getBoundingClientRect();
-
-          if (!heroRect || !floatingImageRef.current) {
-            return;
-          }
-
-          gsap.set(floatingImageRef.current, {
-            position: "fixed",
-            top: heroRect.top,
-            left: heroRect.left,
-            width: heroRect.width,
-            height: heroRect.height,
-            opacity: 1,
-            display: "block",
-          });
-
-          travelTween.progress(0);
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: "#about",
-        start: "top bottom",
-        end: "bottom bottom",
-        onEnter: () => {
-          if (!floatingImageRef.current) {
-            return;
-          }
-
-          floatingImageRef.current.style.display = "block";
-          gsap.to(floatingImageRef.current, {
-            opacity: 1,
-            duration: 0.3,
-          });
-        },
-        onLeaveBack: () => {
-          if (!floatingImageRef.current) {
-            return;
-          }
-
-          floatingImageRef.current.style.display = "block";
-          gsap.to(floatingImageRef.current, {
-            opacity: 1,
-            duration: 0.2,
-          });
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: "#projects",
-        start: "top bottom",
-        end: "bottom top",
-        onEnter: () => {
-          if (!floatingImageRef.current) {
-            return;
-          }
-
-          gsap.to(floatingImageRef.current, {
-            opacity: 0,
-            duration: 0.4,
-            onComplete: () => {
-              if (floatingImageRef.current) {
-                floatingImageRef.current.style.display = "none";
-              }
-            },
-          });
-        },
-        onLeaveBack: () => {
-          if (!floatingImageRef.current) {
-            return;
-          }
-
-          floatingImageRef.current.style.display = "block";
-          gsap.to(floatingImageRef.current, {
-            opacity: 1,
-            duration: 0.4,
-          });
-        },
-      });
-    });
-
     return () => {
+      ScrollTrigger.removeEventListener("refreshInit", measure);
       ctx.revert();
       window.clearTimeout(refreshTimeout);
       window.removeEventListener("load", handleWindowLoad);
       ScrollTrigger.killAll();
     };
-  }, [isDesktop, isLoading]);
+  }, [isDesktop, isTablet, isLoading]);
 
   return (
+    // reducedMotion="user": framer-motion skips transform animations for
+    // visitors with the OS "reduce motion" setting on.
+    <MotionConfig reducedMotion="user">
     <main className="min-h-screen bg-bg pb-24 text-white md:pb-0">
       {isLoading ? (
         <div
@@ -374,6 +310,7 @@ export default function Home() {
 
       {!isLoading ? (
         <>
+          <ScrollProgress />
           <Navbar />
           <DotNav />
 
@@ -410,5 +347,6 @@ export default function Home() {
         </>
       ) : null}
     </main>
+    </MotionConfig>
   );
 }

@@ -143,6 +143,53 @@
   box-sizing: border-box;
 }
 
+/* Skills icon-cloud tooltip. TagCanvas appends this div to <body> and sets
+   left/top at the cursor; the transform centres it under the pointer. */
+.skill-tooltip {
+  /* TagCanvas positions this in canvas pixels, which drift when the canvas is
+     scaled by CSS. IconCloud tracks the real cursor in --tt-x/--tt-y instead. */
+  position: fixed !important;
+  left: var(--tt-x, -9999px) !important;
+  top: calc(var(--tt-y, -9999px) - 30px) !important;
+  z-index: 60 !important;
+  transform: translate(-50%, -100%);
+  padding: 6px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  background: rgba(8, 5, 16, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 8px 24px var(--color-accent-glow);
+  color: var(--color-text);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: skill-tooltip-in 160ms ease-out;
+}
+
+@keyframes skill-tooltip-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-100% + 4px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-tooltip {
+    animation: none;
+  }
+}
+
 .bento-grid {
   width: 100%;
   display: grid;
@@ -160,6 +207,11 @@
     grid-column: auto !important;
     grid-row: auto !important;
     min-height: 300px !important;
+  }
+
+  /* Odd card count: let the last card span both columns instead of leaving a gap. */
+  .bento-grid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1 !important;
   }
 }
 
@@ -256,10 +308,6 @@
 }
 
 @media (min-width: 767px) and (max-width: 1023px) {
-  .floating-hero-image {
-    transform: none !important;
-  }
-
   .hero-right-column {
     min-height: 62svh !important;
     height: 62svh !important;
